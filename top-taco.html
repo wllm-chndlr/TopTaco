@@ -155,7 +155,21 @@
                   </div>
                   <div class="card-reveal">
                     <span class="card-title grey-text text-darken-4">#8<i class="material-icons right">close</i></span>
-                    <p>Submit your own rating!</p>
+                    <p>Rate this place!</p>
+                    <form>
+                    <div class="input-field">
+                        <label for="rating-input">Rating</label>
+                        <input type="number" max="5" class="taco-rating" id="rating-input"></input>
+                    </div>
+                    <button type="submit" class="btn waves-effect pulse" id="submit-taco-rating">Submit</button>
+                    </form>
+                    <!-- <span id="taco-rating">
+                      <i class="fa fa-skyatlas" aria-hidden="true" id="1" value="1"></i>
+                      <i class="fa fa-skyatlas" aria-hidden="true" id="2" value="2"></i>
+                      <i class="fa fa-skyatlas" aria-hidden="true" id="3" value="3"></i>
+                      <i class="fa fa-skyatlas" aria-hidden="true" id="4" value="4"></i>
+                      <i class="fa fa-skyatlas" aria-hidden="true" id="5" value="5"></i>
+                    </span> -->
                   </div>
             </div>
         </div>
@@ -193,6 +207,8 @@
         </div>
     </div>
 
+    <div id="tacoRating"></div>
+
     <img class="responsive-img" id="map" src="assets/images/map2.png">
 
     <footer class="page-footer">
@@ -215,7 +231,17 @@
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     
+    <!-- Materialize -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
+    <!-- Font Awesome -->
+    <script src="https://use.fontawesome.com/37b77d525c.js"></script>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/4.4.0/firebase.js"></script>
+
+    <!-- Proprietary JS --> 
+    <script src="assets/javascript/user-ratings.js"></script>
   
   </body>
 

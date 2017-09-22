@@ -24,3 +24,7 @@ main {
 .card {
    margin-top: 20px;
 }
+
+#tacoRating {
+   text-align: center;
+}
