@@ -1,12 +1,12 @@
 // Initialize Firebase
 var config = {
-   apiKey: "AIzaSyAWF_HOzVwnPQnSy2_DFn4EV6KXvID7IiA",
-   authDomain: "top-taco-93ba2.firebaseapp.com",
-   databaseURL: "https://top-taco-93ba2.firebaseio.com",
-   projectId: "top-taco-93ba2",
-   storageBucket: "",
-   messagingSenderId: "774600990759"
- };
+  apiKey: "AIzaSyDYHtujNwrjbWo4W27RWfhsdRW0isii6j0",
+  authDomain: "top-taco-fa533.firebaseapp.com",
+  databaseURL: "https://top-taco-fa533.firebaseio.com",
+  projectId: "top-taco-fa533",
+  storageBucket: "",
+  messagingSenderId: "490159101789"
+};
  firebase.initializeApp(config);
 
 // Assign Firebase database to a variable
@@ -45,7 +45,7 @@ database.ref().orderByChild("dateAdded").on("child_added", function(snapshot) {
   // Store the snapshot.val() in a variable for convenience
   var tacoz = snapshot.val();
 
-  // Append train details to the table
+  // Append train details to the div
   $("#tacoRating").append(tacoz.userRating);
   
 // Handle the errors
