@@ -18,7 +18,8 @@ main {
 }
 
 #map {
-   margin: 30px 50px 50px 50px;
+   *margin: 30px 50px 50px 50px;
+   
 }
 
 .card {
