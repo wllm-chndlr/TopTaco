@@ -7,7 +7,8 @@ var config = {
   storageBucket: "",
   messagingSenderId: "490159101789"
 };
- firebase.initializeApp(config);
+
+firebase.initializeApp(config);
 
 // Assign Firebase database to a variable
 var database = firebase.database();
@@ -58,7 +59,10 @@ var map;
 // Define infowindow
 var infowindow;
 //Define results array
-var arr = [];
+var googleArray = [];
+var name = "";
+var rating = "";
+var address = "";
 
 //initiMap function, places map with location centered
 function initMap() {
@@ -97,43 +101,49 @@ function facebookComplete() {
   }
 }
 
-  function callback(results, status, pagination) {
-    console.log('running callback provideed togoogle')
-    if (status === google.maps.places.PlacesServiceStatus.OK) {
-      for (var i = 0; i < results.length; i++) {
-        createMarker(results[i]);
-            //console.log(results[i]);
-            //console.log(results.length);
-        arr.push(results[i])
-            
-        //console.log(arr[i].name)
-        //console.log(arr[i].formatted_address)
-        //console.log(arr[i].rating)
-      }
-      
-      console.log(arr);
-    }
+function callback(results, status, pagination) {
+  console.log('running callback provided to google')
+  if (status === google.maps.places.PlacesServiceStatus.OK) {
+    for (var i = 0; i < results.length; i++) {
+      createMarker(results[i]);
+          //console.log(results[i]);
+          //console.log(results.length);
+      googleArray.push(results[i])
 
-    if (pagination.hasNextPage) {
-      pagination.nextPage();
-    } else {
-      googleComplete();
+      //console.log(arr[i].name)
+      //console.log(arr[i].formatted_address)
+      //console.log(arr[i].rating)
+      console.log(googleArray[0].name);
+
+      $('#numberOne').text(googleArray[0].name);
+
+
     }
+    
+    console.log(googleArray);
   }
 
-  var p = arr[0];
+  if (pagination.hasNextPage) {
+    pagination.nextPage();
+  } else {
+    googleComplete();
+  }
+  // return googleArray;
+}
+
+var p = googleArray[0];
 
 
 
-  function createMarker(place) {
-    var placeLoc = place.geometry.location;
-    var marker = new google.maps.Marker({
-    map: map,
-    position: place.geometry.location
+function createMarker(place) {
+  var placeLoc = place.geometry.location;
+  var marker = new google.maps.Marker({
+  map: map,
+  position: place.geometry.location
+});
+
+google.maps.event.addListener(marker, 'click', function() {
+  infowindow.setContent(place.name);
+  infowindow.open(map, this);
   });
-
-  google.maps.event.addListener(marker, 'click', function() {
-    infowindow.setContent(place.name);
-    infowindow.open(map, this);
-    });
-  }
+}
