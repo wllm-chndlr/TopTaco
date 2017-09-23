@@ -68,6 +68,7 @@ var googleArray = [];
 var name = "";
 var rating = "";
 var address = "";
+var splitAddress = "";
 
 //initiMap function, places map with location centered
 function initMap() {
@@ -94,7 +95,7 @@ function googleComplete() {
   googleComplete = true;
 
   if (facebookComplete) {
-    compareRatings();
+    // compareRatings();
   }
 }
 
@@ -102,45 +103,54 @@ function facebookComplete() {
   facebookComplete = true;
 
   if (googleComplete) {
-    compareRatings();
+    // compareRatings();
   }
 }
+
+// function cleanGoogleAddress() {
+//   for (var i = 0; i < googleArray.length; i++) {
+//     googleArray[i].cleanAddress = splitAddress[0];
+//   }
+// }
 
 function callback(results, status, pagination) {
   console.log('running callback provided to google')
   if (status === google.maps.places.PlacesServiceStatus.OK) {
     for (var i = 0; i < results.length; i++) {
       createMarker(results[i]);
-          //console.log(results[i]);
-          //console.log(results.length);
-      googleArray.push(results[i])
 
-      //console.log(arr[i].name)
-      //console.log(arr[i].formatted_address)
-      //console.log(arr[i].rating)
-      console.log(googleArray[0].name);
+      results[i].cleanAddress = results[i].formatted_address.replace(/\s/g, '').split(',')[0];
+      googleArray.push(results[i])
+      
+      var splitAddress = googleArray[i].formatted_address.replace(/\s/g, '').split(',');
+      googleArray[i].cleanAddress = splitAddress[0];
 
       $('#name1').text(googleArray[0].name);
       $('#address1').text(googleArray[0].formatted_address);
       
-
-
     }
-    
+
     console.log(googleArray);
+  
   }
 
   if (pagination.hasNextPage) {
     pagination.nextPage();
+    // cleanGoogleAddress();
   } else {
     googleComplete();
   }
   // return googleArray;
+
+
 }
 
+
+
+
+
+
 var p = googleArray[0];
-
-
 
 function createMarker(place) {
   var placeLoc = place.geometry.location;
@@ -197,3 +207,5 @@ function getFacebookResults() {
 }
 
 getFacebookResults();
+
+
