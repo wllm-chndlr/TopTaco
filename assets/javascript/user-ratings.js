@@ -147,3 +147,46 @@ google.maps.event.addListener(marker, 'click', function() {
   infowindow.open(map, this);
   });
 }
+
+//
+// Facebook api
+//
+
+var fbResults = [];
+
+function aggregateResults(results) {
+    for (var i = 0; i < results.length; i++) {
+        var inResults = jQuery.inArray(results[i], fbResults);
+        if (inResults === -1) {
+            fbResults.push(results[i]);
+        }
+    }
+}
+
+function getFacebookResults() {
+    var fbSearches = ["Taco", "DosBatos", "Chuy's"];
+
+    var fbAppID = "1293487770758016";
+    var fbAppSecret = "e0911eecb55544d6de189dd6ad7d169b";
+
+    var fbBaseURL = "https://graph.facebook.com/v2.10/search?";
+    var fbSearchPlaces = "type=place&q=tacos&center=30.2666,-97.7333&distance=10000&limit=1000"; // meters
+    var fbSearchFields = "&fields=name,rating_count,overall_star_rating,cover,location,website";
+    var fbToken = "&access_token=" + fbAppID + "|" + fbAppSecret;
+    var queryURL = fbBaseURL + fbSearchPlaces + fbSearchFields + fbToken;
+
+    for (var i = 0; i < fbSearches.length; i++) {
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).done(function(response) {
+            console.log("done!");
+            var results = response.data;
+            aggregateResults(results);
+        });
+    }
+    console.log(fbResults);
+    facebookComplete();
+}
+
+getFacebookResults();
