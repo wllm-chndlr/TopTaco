@@ -13,22 +13,27 @@ firebase.initializeApp(config);
 // Assign Firebase database to a variable
 var database = firebase.database();
 
+var userRating = 0;
+
 // Button to submit taco rating
 $("#submit-taco-rating").on("click", function(event) {
 
   event.preventDefault();
   
   // Grabs user rating
-  var userRating = $("#rating-input").val().trim();
+  userRating = $("#rating-input").val().trim();
   console.log(userRating);
 
-  // Creates local temporary object for holding train data
-  var newRating = {
-    userRating: userRating
-  };
+  // // Creates local temporary object for holding rating data
+  // var newRating = {
+  //   userRating: userRating
+  // };
 
   // Uploads train data to the database
-  database.ref().push(newRating);
+  database.ref().push({
+    newRating: userRating,
+    dateAdded: firebase.database.ServerValue.TIMESTAMP
+  });
 
   // Notification that train details have been added
   Materialize.toast('Rating submitted!', 3000, 'orange rounded');
@@ -41,13 +46,13 @@ $("#submit-taco-rating").on("click", function(event) {
 });
 
 // Firebase watcher + initial loader + order
-database.ref().orderByChild("dateAdded").on("child_added", function(snapshot) {
+database.ref().orderByChild("dateAdded").on("child_added", function(childSnapshot) {
   
   // Store the snapshot.val() in a variable for convenience
-  var tacoz = snapshot.val();
+  var tacoz = childSnapshot.val().newRating;
 
   // Append train details to the div
-  $("#tacoRating").append(tacoz.userRating);
+  $("#tacoRating").append(tacoz);
   
 // Handle the errors
 }, function(errorObject) {
@@ -115,7 +120,9 @@ function callback(results, status, pagination) {
       //console.log(arr[i].rating)
       console.log(googleArray[0].name);
 
-      $('#numberOne').text(googleArray[0].name);
+      $('#name1').text(googleArray[0].name);
+      $('#address1').text(googleArray[0].formatted_address);
+      
 
 
     }
