@@ -52,3 +52,88 @@ database.ref().orderByChild("dateAdded").on("child_added", function(snapshot) {
 }, function(errorObject) {
   console.log("Errors handled: " + errorObject.code);
 });
+
+// Define map
+var map;
+// Define infowindow
+var infowindow;
+//Define results array
+var arr = [];
+
+//initiMap function, places map with location centered
+function initMap() {
+  var austin = {lat: 30.2672, lng: -97.7431};
+
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: austin,
+    zoom: 15
+  });
+
+  var reqeust = {
+    location: austin,
+    radius: "100",
+    query: "tacos in austin" //text search, can change the query string to anything e.g. shoe stores. 
+  }
+
+  infowindow = new google.maps.InfoWindow();
+        
+  var service = new google.maps.places.PlacesService(map);
+  service.textSearch(reqeust, callback);
+}
+
+function googleComplete() {
+  googleComplete = true;
+
+  if (facebookComplete) {
+    compareRatings();
+  }
+}
+
+function facebookComplete() {
+  facebookComplete = true;
+
+  if (googleComplete) {
+    compareRatings();
+  }
+}
+
+  function callback(results, status, pagination) {
+    console.log('running callback provideed togoogle')
+    if (status === google.maps.places.PlacesServiceStatus.OK) {
+      for (var i = 0; i < results.length; i++) {
+        createMarker(results[i]);
+            //console.log(results[i]);
+            //console.log(results.length);
+        arr.push(results[i])
+            
+        //console.log(arr[i].name)
+        //console.log(arr[i].formatted_address)
+        //console.log(arr[i].rating)
+      }
+      
+      console.log(arr);
+    }
+
+    if (pagination.hasNextPage) {
+      pagination.nextPage();
+    } else {
+      googleComplete();
+    }
+  }
+
+  var p = arr[0];
+
+
+
+  function createMarker(place) {
+    var placeLoc = place.geometry.location;
+    var marker = new google.maps.Marker({
+    map: map,
+    position: place.geometry.location
+  });
+
+  google.maps.event.addListener(marker, 'click', function() {
+    infowindow.setContent(place.name);
+    infowindow.open(map, this);
+    });
+  }
