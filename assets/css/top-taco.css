@@ -18,8 +18,7 @@ main {
 }
 
 #map {
-   *margin: 30px 50px 50px 50px;
-   
+   margin: 30px 50px 50px 50px;
 }
 
 .card {
@@ -28,4 +27,8 @@ main {
 
 #tacoRating {
    text-align: center;
+}
+
+#address1 {
+   font-size: 12px;
 }
