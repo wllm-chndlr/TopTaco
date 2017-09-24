@@ -81,7 +81,7 @@ function initMap() {
 
   map = new google.maps.Map(document.getElementById('map'), {
     center: austin,
-    zoom: 15
+    zoom: 12
   });
 
   var reqeust = {
