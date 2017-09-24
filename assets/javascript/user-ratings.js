@@ -1,3 +1,5 @@
+// ********************************** FIREBASE/USER RATING **********************************
+
 // Initialize Firebase
 var config = {
   apiKey: "AIzaSyDYHtujNwrjbWo4W27RWfhsdRW0isii6j0",
@@ -59,18 +61,21 @@ database.ref().orderByChild("dateAdded").on("child_added", function(childSnapsho
   console.log("Errors handled: " + errorObject.code);
 });
 
+// ********************************** GOOGLE API **********************************
+
 // Define map
 var map;
 // Define infowindow
 var infowindow;
 //Define results array
-var googleArray = [];
+var googleResults = [];
+var cleanAddressGoogle = "";
 var name = "";
 var rating = "";
 var address = "";
 var splitAddress = "";
 
-//initiMap function, places map with location centered
+//initMap function, places map with location centered
 function initMap() {
   var austin = {lat: 30.2672, lng: -97.7431};
 
@@ -91,66 +96,35 @@ function initMap() {
   service.textSearch(reqeust, callback);
 }
 
-function googleComplete() {
-  googleComplete = true;
-
-  if (facebookComplete) {
-    // compareRatings();
-  }
-}
-
-function facebookComplete() {
-  facebookComplete = true;
-
-  if (googleComplete) {
-    // compareRatings();
-  }
-}
-
-// function cleanGoogleAddress() {
-//   for (var i = 0; i < googleArray.length; i++) {
-//     googleArray[i].cleanAddress = splitAddress[0];
-//   }
-// }
-
 function callback(results, status, pagination) {
-  console.log('running callback provided to google')
+  // console.log('running callback provided to google')
   if (status === google.maps.places.PlacesServiceStatus.OK) {
     for (var i = 0; i < results.length; i++) {
       createMarker(results[i]);
 
-      results[i].cleanAddress = results[i].formatted_address.replace(/\s/g, '').split(',')[0];
-      googleArray.push(results[i])
+      results[i].cleanAddressGoogle = results[i].formatted_address.replace(/\s|\./g, '').split(',')[0];
+      googleResults.push(results[i])
       
-      var splitAddress = googleArray[i].formatted_address.replace(/\s/g, '').split(',');
-      googleArray[i].cleanAddress = splitAddress[0];
+      var splitAddress = googleResults[i].formatted_address.replace(/\s|\./g, '').split(',')[0];
 
-      $('#name1').text(googleArray[0].name);
-      $('#address1').text(googleArray[0].formatted_address);
+      // $('#name1').text(googleResults[0].name);
+      // $('#address1').text(googleResults[0].formatted_address.split(',')[0]);
       
     }
 
-    console.log(googleArray);
-  
   }
 
   if (pagination.hasNextPage) {
     pagination.nextPage();
-    // cleanGoogleAddress();
   } else {
     googleComplete();
   }
-  // return googleArray;
-
 
 }
 
+console.log(googleResults);
 
-
-
-
-
-var p = googleArray[0];
+// var p = googleResults[0];
 
 function createMarker(place) {
   var placeLoc = place.geometry.location;
@@ -165,47 +139,62 @@ google.maps.event.addListener(marker, 'click', function() {
   });
 }
 
-//
-// Facebook api
-//
+// ********************************** FACEBOOK API **********************************
 
-var fbResults = [];
+var facebookResults = [];
 
-function aggregateResults(results) {
-    for (var i = 0; i < results.length; i++) {
-        var inResults = jQuery.inArray(results[i], fbResults);
+function aggregateResults(resultsFb) {
+    for (var i = 0; i < resultsFb.length; i++) {
+        var inResults = jQuery.inArray(resultsFb[i], facebookResults);
         if (inResults === -1) {
-            fbResults.push(results[i]);
+          resultsFb[i].cleanAddressFb = resultsFb[i].location.street.replace(/\s|\./g, '').split(',')[0];
+          facebookResults.push(resultsFb[i]);
         }
     }
 }
 
 function getFacebookResults() {
-    var fbSearches = ["Taco", "DosBatos", "Chuy's"];
+  var fbSearches = ["Taco", "DosBatos", "Chuy's"];
 
-    var fbAppID = "1293487770758016";
-    var fbAppSecret = "e0911eecb55544d6de189dd6ad7d169b";
+  var fbAppID = "1293487770758016";
+  var fbAppSecret = "e0911eecb55544d6de189dd6ad7d169b";
 
-    var fbBaseURL = "https://graph.facebook.com/v2.10/search?";
-    var fbSearchPlaces = "type=place&q=tacos&center=30.2666,-97.7333&distance=10000&limit=1000"; // meters
-    var fbSearchFields = "&fields=name,rating_count,overall_star_rating,cover,location,website";
-    var fbToken = "&access_token=" + fbAppID + "|" + fbAppSecret;
-    var queryURL = fbBaseURL + fbSearchPlaces + fbSearchFields + fbToken;
+  var fbBaseURL = "https://graph.facebook.com/v2.10/search?";
+  var fbSearchPlaces = "type=place&q=tacos&center=30.2666,-97.7333&distance=10000&limit=1000"; // meters
+  var fbSearchFields = "&fields=name,rating_count,overall_star_rating,cover,location,website";
+  var fbToken = "&access_token=" + fbAppID + "|" + fbAppSecret;
+  var queryURL = fbBaseURL + fbSearchPlaces + fbSearchFields + fbToken;
 
-    for (var i = 0; i < fbSearches.length; i++) {
-        $.ajax({
-            url: queryURL,
-            method: "GET"
-        }).done(function(response) {
-            console.log("done!");
-            var results = response.data;
-            aggregateResults(results);
-        });
-    }
-    console.log(fbResults);
-    facebookComplete();
+  // for (var i = 0; i < fbSearches.length; i++) {
+      $.ajax({
+          url: queryURL,
+          method: "GET"
+      }).done(function(response) {
+          // console.log("facebook done!");
+          var resultsFb = response.data;
+          aggregateResults(resultsFb);
+      });
+  // }
+  facebookComplete();
 }
 
 getFacebookResults();
+console.log(facebookResults);
 
+// ********************************** CROSS-CHECKING **********************************
 
+function googleComplete() {
+  googleComplete = true;
+
+  if (facebookComplete) {
+    // findDuplicates();
+  }
+}
+
+function facebookComplete() {
+  facebookComplete = true;
+
+  if (googleComplete) {
+    // findDuplicates();
+  }
+}
