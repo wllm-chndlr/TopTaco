@@ -147,8 +147,10 @@ function aggregateResults(resultsFb) {
     for (var i = 0; i < resultsFb.length; i++) {
         var inResults = jQuery.inArray(resultsFb[i], facebookResults);
         if (inResults === -1) {
-          resultsFb[i].cleanAddressFb = resultsFb[i].location.street.replace(/\s|\./g, '').split(',')[0];
-          facebookResults.push(resultsFb[i]);
+          if ("street" in resultsFb[i].location) {
+              resultsFb[i].cleanAddressFb = resultsFb[i].location.street.replace(/\s|\./g, '').split(',')[0];
+              facebookResults.push(resultsFb[i]);
+          }
         }
     }
 }
@@ -160,13 +162,16 @@ function getFacebookResults() {
   var fbAppSecret = "e0911eecb55544d6de189dd6ad7d169b";
 
   var fbBaseURL = "https://graph.facebook.com/v2.10/search?";
-  var fbSearchPlaces = "type=place&q=tacos&center=30.2666,-97.7333&distance=10000&limit=1000"; // meters
+  var fbSearchPlaces = "type=place&center=30.2666,-97.7333&distance=15000&limit=100&q="; // meters
   var fbSearchFields = "&fields=name,rating_count,overall_star_rating,cover,location,website";
   var fbToken = "&access_token=" + fbAppID + "|" + fbAppSecret;
-  var queryURL = fbBaseURL + fbSearchPlaces + fbSearchFields + fbToken;
+  var queryURL = ""
 
-  // for (var i = 0; i < fbSearches.length; i++) {
-      $.ajax({
+  for (var i = 0; i < fbSearches.length; i++) {
+
+    queryURL = fbBaseURL + fbSearchPlaces + fbSearches[i] + fbSearchFields + fbToken;
+
+    $.ajax({
           url: queryURL,
           method: "GET"
       }).done(function(response) {
@@ -174,7 +179,7 @@ function getFacebookResults() {
           var resultsFb = response.data;
           aggregateResults(resultsFb);
       });
-  // }
+  }
   facebookComplete();
 }
 
@@ -196,5 +201,8 @@ function facebookComplete() {
 
   if (googleComplete) {
     // findDuplicates();
+  }
+  else {
+    //
   }
 }
