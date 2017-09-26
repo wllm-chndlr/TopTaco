@@ -1,6 +1,6 @@
 # Top Taco
 
-## Intro
+## Introduction
 
 ## Screenshot
 
@@ -25,7 +25,7 @@
 
 **William Chandler** - *HTLM, CSS, JS, Materialize*
 
-**Scott Shampmpine** - *HTML, CSS, JS, Google Places API*
+**Scott Shampine** - *HTML, CSS, JS, Google Places API*
 
 ### Acknowledgements
 * Josh Madewell - Helping out with giving pointers on the Google API
