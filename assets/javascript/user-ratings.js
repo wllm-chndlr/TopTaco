@@ -102,6 +102,8 @@ function callback(results, status, pagination) {
     for (var i = 0; i < results.length; i++) {
       createMarker(results[i]);
 
+      if ("formatted_address" in results[i]) {
+
       results[i].cleanAddressGoogle = results[i].formatted_address.replace(/\s|\./g, '').split(',')[0];
       googleResults.push(results[i])
       
@@ -110,6 +112,7 @@ function callback(results, status, pagination) {
       // $('#name1').text(googleResults[0].name);
       // $('#address1').text(googleResults[0].formatted_address.split(',')[0]);
       
+      }
     }
 
   }
@@ -192,7 +195,7 @@ function googleComplete() {
   googleComplete = true;
 
   if (facebookComplete) {
-    // findDuplicates();
+    findDuplicates();
   }
 }
 
@@ -200,9 +203,28 @@ function facebookComplete() {
   facebookComplete = true;
 
   if (googleComplete) {
-    // findDuplicates();
+    findDuplicates();
   }
   else {
     //
   }
+}
+
+var topTaco = [];
+
+function findDuplicates() {
+
+  for (var queso = 0; queso < googleResults.length; queso++) {
+
+    for (var guac = 0; guac < facebookResults.length; guac++) {
+      if (googleResults[queso].cleanAddressGoogle === facebookResults[guac].cleanAddressFb) {
+        topTaco.push(googleResults[queso].name);
+        topTaco.push(googleResults[queso].rating);
+        topTaco.push(facebookResults[guac].name);
+        topTaco.push(facebookResults[guac].overall_star_rating);
+              
+      }
+    }
+  }
+  console.log(topTaco);
 }
