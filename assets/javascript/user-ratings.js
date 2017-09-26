@@ -196,6 +196,7 @@ function googleComplete() {
 
   if (facebookComplete) {
     findDuplicates();
+    // displayResults();
   }
 }
 
@@ -204,6 +205,7 @@ function facebookComplete() {
 
   if (googleComplete) {
     findDuplicates();
+    // displayResults();
   }
   else {
     //
@@ -218,13 +220,27 @@ function findDuplicates() {
 
     for (var guac = 0; guac < facebookResults.length; guac++) {
       if (googleResults[queso].cleanAddressGoogle === facebookResults[guac].cleanAddressFb) {
-        topTaco.push(googleResults[queso].name);
-        topTaco.push(googleResults[queso].rating);
-        topTaco.push(facebookResults[guac].name);
-        topTaco.push(facebookResults[guac].overall_star_rating);
-              
+        
+        // topTaco.push(googleResults[queso].name);
+        // topTaco.push(googleResults[queso].rating);
+        // topTaco.push(facebookResults[guac].name);
+        // topTaco.push(facebookResults[guac].overall_star_rating);
+        // topTaco.push(facebookResults[guac].website);
+        
+        topTaco.push( { ID:facebookResults[guac].id.substr(0, 6), 
+          "Name":googleResults[queso].name, 
+          "GRating":googleResults[queso].rating, 
+          "FRating":facebookResults[guac].overall_star_rating, 
+          "AvgRating":(((googleResults[queso].rating + facebookResults[guac].overall_star_rating) / 2).toFixed(2)),
+          "FRatingCount":facebookResults[guac].rating_count,
+          // "Address":facebookResults[guac].name.location.street,
+          // "Photo":facebookResults[guac].cover.source
+        
+        } );
+      
       }
     }
   }
   console.log(topTaco);
+  // $("#name1").html(topTaco[0].ID);
 }
