@@ -1,8 +1,8 @@
-html, body {
+/*html, body {
    height: 100%;
    margin: 0;
    padding: 0;
-}
+} */
 
 body {
    display: flex;
@@ -40,3 +40,12 @@ main {
    font-size: 12px;
 }
 
+.d-flex {
+  display: flex;
+}
+
+@media screen and (max-width: 768px) {
+  .d-flex {
+    display: initial;
+  }
+}
