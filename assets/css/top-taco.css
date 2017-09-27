@@ -36,6 +36,6 @@ main {
    text-align: center;
 }
 
-#address1 {
+.address {
    font-size: 12px;
 }
