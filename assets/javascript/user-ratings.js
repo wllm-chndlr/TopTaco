@@ -297,7 +297,7 @@ function displayResults(topTaco) {
 }
 
 function addTacosToMap(topTaco) {
-    for (var k = 0; k < 11; k++) {
+    for (var k = 0; k < 10; k++) {
         var label = k.toString();
         var myLatlng = new google.maps.LatLng(topTaco[k].Lat, topTaco[k].Lon);
         var marker = new google.maps.Marker({
