@@ -18,7 +18,7 @@ var database = firebase.database();
 var userRating = 0;
 
 // Button to submit taco rating
-$("#submit-taco-rating").on("click", function(event) {
+$(".submit-taco-rating").on("click", function(event) {
 
   event.preventDefault();
   
