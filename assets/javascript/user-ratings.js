@@ -18,7 +18,7 @@ var database = firebase.database();
 var userRating = 0;
 
 // Button to submit taco rating
-$("#submit-taco-rating").on("click", function(event) {
+$(".submit-taco-rating").on("click", function(event) {
 
   event.preventDefault();
   
@@ -159,7 +159,7 @@ function aggregateResults(resultsFb) {
 }
 
 function getFacebookResults() {
-  var fbSearches = ["Taco", "DosBatos", "Chuy's"];
+  var fbSearches = ["Taco", "DosBatos", "Veracruz All Natural"];
 
   var fbAppID = "1293487770758016";
   var fbAppSecret = "e0911eecb55544d6de189dd6ad7d169b";
@@ -219,7 +219,8 @@ function findDuplicates() {
   for (var queso = 0; queso < googleResults.length; queso++) {
 
     for (var guac = 0; guac < facebookResults.length; guac++) {
-      if (googleResults[queso].cleanAddressGoogle === facebookResults[guac].cleanAddressFb) {
+
+      if (googleResults[queso].cleanAddressGoogle.substr(0, 8) === facebookResults[guac].cleanAddressFb.substr(0, 8)) {
 
           // topTaco.push(googleResults[queso].name);
           // topTaco.push(googleResults[queso].rating);
