@@ -24,7 +24,7 @@ main {
 }
 
 #map {
-  /* margin: 30px 50px 50px 50px;*/
+  /* margin: 30px 50px 50px 50px; */
   height: 100%;
 }
 
@@ -36,6 +36,6 @@ main {
    text-align: center;
 }
 
-#address1 {
-   font-size: 12px;
+.loc {
+   font-size: 14px;
 }
