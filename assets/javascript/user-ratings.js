@@ -243,6 +243,14 @@ function findDuplicates() {
           else {
               tacoObject.Photo = "https://orig00.deviantart.net/1986/f/2008/005/d/5/taco_by_taco911.jpg";
           }
+
+          if ("website" in facebookResults[guac]) {
+              tacoObject.Website = facebookResults[guac].website;
+          }
+          else {
+              tacoObject.Website = "#";
+          }
+
           topTaco.push(tacoObject);
 
           // topTaco.push( { ID:facebookResults[guac].id.substr(0, 6),
@@ -261,7 +269,7 @@ function findDuplicates() {
   }
   console.log(topTaco);
   if (topTaco != undefined && topTaco.length > 24) {
-    topTaco = sortTacos(topTaco)
+    topTaco = sortTacos(topTaco);
     displayResults(topTaco);
   }
 }
@@ -276,11 +284,11 @@ function sortTacos(topTaco) {
 }
 
 function displayResults(topTaco) {
-for (var j = 0; j < 11; j++) {
-  $("#name" + j).html(topTaco[j].Name);
-  //$("#image" + i).html(topTaco[i].Photo);
-  $("#image" + j).attr("src", topTaco[j].Photo);
-  $("#address" + j).html(topTaco[j].Address);
-  $("#rating" + j).html(topTaco[j].AvgRating);
-  }
+    for (var j = 0; j < 11; j++) {
+      $("#name" + j).html(topTaco[j].Name);
+      $("#image" + j).attr("src", topTaco[j].Photo);
+      $("#address" + j).html(topTaco[j].Address);
+      $("#rating" + j).html(topTaco[j].AvgRating);
+      $("#website" + j).attr("href", topTaco[j].Website);
+    }
 }
