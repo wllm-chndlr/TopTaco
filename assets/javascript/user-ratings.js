@@ -100,7 +100,7 @@ function callback(results, status, pagination) {
   // console.log('running callback provided to google')
   if (status === google.maps.places.PlacesServiceStatus.OK) {
     for (var i = 0; i < results.length; i++) {
-      createMarker(results[i]);
+      // createMarker(results[i]);
 
       if ("formatted_address" in results[i]) {
 
@@ -236,6 +236,8 @@ function findDuplicates() {
           tacoObject.AvgRating = parseFloat(((googleResults[queso].rating + facebookResults[guac].overall_star_rating) / 2).toFixed(2));
           tacoObject.FRatingCount = facebookResults[guac].rating_count;
           tacoObject.Address = facebookResults[guac].location.street;
+          tacoObject.Lon = facebookResults[guac].location.longitude;
+          tacoObject.Lat = facebookResults[guac].location.latitude;
 
           if ("cover" in facebookResults[guac]) {
               tacoObject.Photo = facebookResults[guac].cover.source;
@@ -243,6 +245,14 @@ function findDuplicates() {
           else {
               tacoObject.Photo = "https://orig00.deviantart.net/1986/f/2008/005/d/5/taco_by_taco911.jpg";
           }
+
+          if ("website" in facebookResults[guac]) {
+              tacoObject.Website = facebookResults[guac].website;
+          }
+          else {
+              tacoObject.Website = "#";
+          }
+
           topTaco.push(tacoObject);
 
           // topTaco.push( { ID:facebookResults[guac].id.substr(0, 6),
@@ -261,8 +271,9 @@ function findDuplicates() {
   }
   console.log(topTaco);
   if (topTaco != undefined && topTaco.length > 24) {
-    topTaco = sortTacos(topTaco)
+    topTaco = sortTacos(topTaco);
     displayResults(topTaco);
+    addTacosToMap(topTaco);
   }
 }
 
@@ -276,10 +287,25 @@ function sortTacos(topTaco) {
 }
 
 function displayResults(topTaco) {
-for (var j = 0; j < 11; j++) {
-  $("#name" + j).html(topTaco[j].Name);
-  $("#image" + j).attr("src", topTaco[j].Photo);
-  $("#address" + j).html(topTaco[j].Address);
-  $("#rating" + j).html(topTaco[j].AvgRating);
-  }
+    for (var j = 0; j < 11; j++) {
+      $("#name" + j).html(topTaco[j].Name);
+      $("#image" + j).attr("src", topTaco[j].Photo);
+      $("#address" + j).html(topTaco[j].Address);
+      $("#rating" + j).html(topTaco[j].AvgRating);
+      $("#website" + j).attr("href", topTaco[j].Website);
+    }
+}
+
+function addTacosToMap(topTaco) {
+    for (var k = 0; k < 10; k++) {
+        var label = k.toString();
+        var myLatlng = new google.maps.LatLng(topTaco[k].Lat, topTaco[k].Lon);
+        var marker = new google.maps.Marker({
+            position: myLatlng,
+            title: topTaco[k].Name,
+            label: label,
+            map: map,
+            draggable: true
+        });
+    }
 }
