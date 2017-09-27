@@ -100,7 +100,7 @@ function callback(results, status, pagination) {
   // console.log('running callback provided to google')
   if (status === google.maps.places.PlacesServiceStatus.OK) {
     for (var i = 0; i < results.length; i++) {
-      createMarker(results[i]);
+      // createMarker(results[i]);
 
       if ("formatted_address" in results[i]) {
 
@@ -236,6 +236,8 @@ function findDuplicates() {
           tacoObject.AvgRating = parseFloat(((googleResults[queso].rating + facebookResults[guac].overall_star_rating) / 2).toFixed(2));
           tacoObject.FRatingCount = facebookResults[guac].rating_count;
           tacoObject.Address = facebookResults[guac].location.street;
+          tacoObject.Lon = facebookResults[guac].location.longitude;
+          tacoObject.Lat = facebookResults[guac].location.latitude;
 
           if ("cover" in facebookResults[guac]) {
               tacoObject.Photo = facebookResults[guac].cover.source;
@@ -271,6 +273,7 @@ function findDuplicates() {
   if (topTaco != undefined && topTaco.length > 24) {
     topTaco = sortTacos(topTaco);
     displayResults(topTaco);
+    addTacosToMap(topTaco);
   }
 }
 
@@ -290,5 +293,19 @@ function displayResults(topTaco) {
       $("#address" + j).html(topTaco[j].Address);
       $("#rating" + j).html(topTaco[j].AvgRating);
       $("#website" + j).attr("href", topTaco[j].Website);
+    }
+}
+
+function addTacosToMap(topTaco) {
+    for (var k = 0; k < 11; k++) {
+        var label = k.toString();
+        var myLatlng = new google.maps.LatLng(topTaco[k].Lat, topTaco[k].Lon);
+        var marker = new google.maps.Marker({
+            position: myLatlng,
+            title: topTaco[k].Name,
+            label: label,
+            map: map,
+            draggable: true
+        });
     }
 }
