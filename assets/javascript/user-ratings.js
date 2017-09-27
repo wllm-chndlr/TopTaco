@@ -241,7 +241,7 @@ function findDuplicates() {
               tacoObject.Photo = facebookResults[guac].cover.source;
           }
           else {
-              tacoObject.Photo = "default";
+              tacoObject.Photo = "https://orig00.deviantart.net/1986/f/2008/005/d/5/taco_by_taco911.jpg";
           }
           topTaco.push(tacoObject);
 
@@ -267,5 +267,6 @@ function findDuplicates() {
 
 function displayResults(topTaco) {
   $("#name1").html(topTaco[0].Name);
-  $("#image1").html(topTaco[0].Photo);
+  // $("#image1").html(topTaco[0].Photo);
+  $("#image1").attr("src", topTaco[0].Photo)
 }
