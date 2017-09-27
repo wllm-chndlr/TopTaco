@@ -220,27 +220,52 @@ function findDuplicates() {
 
     for (var guac = 0; guac < facebookResults.length; guac++) {
       if (googleResults[queso].cleanAddressGoogle === facebookResults[guac].cleanAddressFb) {
-        
-        // topTaco.push(googleResults[queso].name);
-        // topTaco.push(googleResults[queso].rating);
-        // topTaco.push(facebookResults[guac].name);
-        // topTaco.push(facebookResults[guac].overall_star_rating);
-        // topTaco.push(facebookResults[guac].website);
-        
-        topTaco.push( { ID:facebookResults[guac].id.substr(0, 6), 
-          "Name":googleResults[queso].name, 
-          "GRating":googleResults[queso].rating, 
-          "FRating":facebookResults[guac].overall_star_rating, 
-          "AvgRating":(((googleResults[queso].rating + facebookResults[guac].overall_star_rating) / 2).toFixed(2)),
-          "FRatingCount":facebookResults[guac].rating_count,
-          // "Address":facebookResults[guac].name.location.street,
-          // "Photo":facebookResults[guac].cover.source
-        
-        } );
+
+          // topTaco.push(googleResults[queso].name);
+          // topTaco.push(googleResults[queso].rating);
+          // topTaco.push(facebookResults[guac].name);
+          // topTaco.push(facebookResults[guac].overall_star_rating);
+          // topTaco.push(facebookResults[guac].website);
+
+          var tacoObject = {};
+
+          tacoObject.ID = facebookResults[guac].id.substr(0, 6);
+          tacoObject.Name = googleResults[queso].name;
+          tacoObject.GRating = googleResults[queso].rating;
+          tacoObject.FRating = facebookResults[guac].overall_star_rating;
+          tacoObject.AvgRating = (((googleResults[queso].rating + facebookResults[guac].overall_star_rating) / 2).toFixed(2));
+          tacoObject.FRatingCount = facebookResults[guac].rating_count;
+          tacoObject.Address = facebookResults[guac].rating_count;
+
+          if ("source" in facebookResults[guac]) {
+              tacoObject.Photo = facebookResults[guac].cover.source;
+          }
+          else {
+              tacoObject.Photo = "default";
+          }
+          topTaco.push(tacoObject);
+
+          // topTaco.push( { ID:facebookResults[guac].id.substr(0, 6),
+          //   "Name":googleResults[queso].name,
+          //   "GRating":googleResults[queso].rating,
+          //   "FRating":facebookResults[guac].overall_star_rating,
+          //   "AvgRating":(((googleResults[queso].rating + facebookResults[guac].overall_star_rating) / 2).toFixed(2)),
+          //   "FRatingCount":facebookResults[guac].rating_count,
+          //   // "Address":facebookResults[guac].name.location.street,
+          //   // "Photo":facebookResults[guac].cover.source
+          //
+          // } );
       
       }
     }
   }
   console.log(topTaco);
-  // $("#name1").html(topTaco[0].ID);
+  if (topTaco != undefined && topTaco.length > 24) {
+    displayResults(topTaco);
+  }
+}
+
+function displayResults(topTaco) {
+  $("#name1").html(topTaco[0].Name);
+  $("#image1").html(topTaco[0].Photo);
 }
