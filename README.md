@@ -36,7 +36,7 @@ Tacos are serious business in Austin. Top Taco ATX hopes to solve the age old of
 
 ## Authors
 
-**[Nick Jacob](https://github.com/nick.jacob)** - *HTML, CSS, JavaScript, JQuery, Facebook API*
+**[Nick Jacob](https://github.com/nick-jacob)** - *HTML, CSS, JavaScript, JQuery, Facebook API*
 
 **[William Chandler](https://github.com/wllm-chndlr)** - *HTLM, CSS, JavaScript, JQuery, Materialize*
 
