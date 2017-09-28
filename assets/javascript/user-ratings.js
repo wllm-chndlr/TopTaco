@@ -100,7 +100,7 @@ function callback(results, status, pagination) {
   // console.log('running callback provided to google')
   if (status === google.maps.places.PlacesServiceStatus.OK) {
     for (var i = 0; i < results.length; i++) {
-      createMarker(results[i]);
+      // createMarker(results[i]);
 
       if ("formatted_address" in results[i]) {
 
@@ -220,27 +220,92 @@ function findDuplicates() {
 
     for (var guac = 0; guac < facebookResults.length; guac++) {
       if (googleResults[queso].cleanAddressGoogle === facebookResults[guac].cleanAddressFb) {
-        
-        // topTaco.push(googleResults[queso].name);
-        // topTaco.push(googleResults[queso].rating);
-        // topTaco.push(facebookResults[guac].name);
-        // topTaco.push(facebookResults[guac].overall_star_rating);
-        // topTaco.push(facebookResults[guac].website);
-        
-        topTaco.push( { ID:facebookResults[guac].id.substr(0, 6), 
-          "Name":googleResults[queso].name, 
-          "GRating":googleResults[queso].rating, 
-          "FRating":facebookResults[guac].overall_star_rating, 
-          "AvgRating":(((googleResults[queso].rating + facebookResults[guac].overall_star_rating) / 2).toFixed(2)),
-          "FRatingCount":facebookResults[guac].rating_count,
-          // "Address":facebookResults[guac].name.location.street,
-          // "Photo":facebookResults[guac].cover.source
-        
-        } );
+
+          // topTaco.push(googleResults[queso].name);
+          // topTaco.push(googleResults[queso].rating);
+          // topTaco.push(facebookResults[guac].name);
+          // topTaco.push(facebookResults[guac].overall_star_rating);
+          // topTaco.push(facebookResults[guac].website);
+
+          var tacoObject = {};
+
+          tacoObject.ID = facebookResults[guac].id.substr(0, 6);
+          tacoObject.Name = googleResults[queso].name;
+          tacoObject.GRating = googleResults[queso].rating;
+          tacoObject.FRating = facebookResults[guac].overall_star_rating;
+          tacoObject.AvgRating = parseFloat(((googleResults[queso].rating + facebookResults[guac].overall_star_rating) / 2).toFixed(2));
+          tacoObject.FRatingCount = facebookResults[guac].rating_count;
+          tacoObject.Address = facebookResults[guac].location.street;
+          tacoObject.Lon = facebookResults[guac].location.longitude;
+          tacoObject.Lat = facebookResults[guac].location.latitude;
+
+          if ("cover" in facebookResults[guac]) {
+              tacoObject.Photo = facebookResults[guac].cover.source;
+          }
+          else {
+              tacoObject.Photo = "https://orig00.deviantart.net/1986/f/2008/005/d/5/taco_by_taco911.jpg";
+          }
+
+          if ("website" in facebookResults[guac]) {
+              tacoObject.Website = facebookResults[guac].website;
+          }
+          else {
+              tacoObject.Website = "#";
+          }
+
+          topTaco.push(tacoObject);
+
+          // topTaco.push( { ID:facebookResults[guac].id.substr(0, 6),
+          //   "Name":googleResults[queso].name,
+          //   "GRating":googleResults[queso].rating,
+          //   "FRating":facebookResults[guac].overall_star_rating,
+          //   "AvgRating":(((googleResults[queso].rating + facebookResults[guac].overall_star_rating) / 2).toFixed(2)),
+          //   "FRatingCount":facebookResults[guac].rating_count,
+          //   // "Address":facebookResults[guac].name.location.street,
+          //   // "Photo":facebookResults[guac].cover.source
+          //
+          // } );
       
       }
     }
   }
   console.log(topTaco);
-  // $("#name1").html(topTaco[0].ID);
+  if (topTaco != undefined && topTaco.length > 24) {
+    topTaco = sortTacos(topTaco);
+    displayResults(topTaco);
+    addTacosToMap(topTaco);
+  }
+}
+
+function sortTacos(topTaco) {
+
+  topTaco.sort(function(obj1, obj2) {
+    return obj2.AvgRating - obj1.AvgRating;
+  });
+
+  return topTaco;
+}
+
+function displayResults(topTaco) {
+    for (var j = 0; j < 11; j++) {
+      $("#name" + j).html(topTaco[j].Name);
+      $("#image" + j).attr("src", topTaco[j].Photo);
+      $("#address" + j).html(topTaco[j].Address);
+      $("#rating" + j).html(topTaco[j].AvgRating);
+      $("#website" + j).attr("href", topTaco[j].Website);
+    }
+}
+
+function addTacosToMap(topTaco) {
+    for (var k = 0; k < 10; k++) {
+        var label = k.toString();
+        var myLatlng = new google.maps.LatLng(topTaco[k].Lat, topTaco[k].Lon);
+        var marker = new google.maps.Marker({
+            position: myLatlng,
+            title: topTaco[k].Name,
+            label: label,
+            map: map,
+            draggable: true
+        });
+    }
 }
