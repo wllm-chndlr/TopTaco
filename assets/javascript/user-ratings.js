@@ -21,19 +21,26 @@ var userRating = 0;
 $(".submit-taco-rating").on("click", function(event) {
 
   event.preventDefault();
-  
+
+  // Grabs button value
+  var buttonValue = $(this).attr("value");
+  console.log(buttonValue);
+
   // Grabs user rating
-  userRating = $("#rating-input").val().trim();
+  var inputID = "#x".replace("x", buttonValue);
+  var userRating = $(inputID).val().trim();
   console.log(userRating);
 
-  // // Creates local temporary object for holding rating data
-  // var newRating = {
-  //   userRating: userRating
-  // };
+  // Grabs taco id
+  var tacoID = $(this).attr("data-id");
+  console.log(tacoID);
+
+  // Organize user ratings by unique taco id
+  var reference = tacoID + "/";
 
   // Uploads train data to the database
-  database.ref().push({
-    newRating: userRating,
+  database.ref(reference).push({
+    userRating: userRating,
     dateAdded: firebase.database.ServerValue.TIMESTAMP
   });
 
@@ -273,6 +280,7 @@ function findDuplicates() {
   console.log(topTaco);
   if (topTaco != undefined && topTaco.length > 24) {
     topTaco = sortTacos(topTaco);
+    topTaco = getUserRatings(topTaco);
     displayResults(topTaco);
     addTacosToMap(topTaco);
   }
@@ -290,6 +298,7 @@ function sortTacos(topTaco) {
 function displayResults(topTaco) {
     for (var j = 0; j < 11; j++) {
       $("#name" + j).html(topTaco[j].Name);
+      $("#button" + j).attr("data-id", topTaco[j].ID);
       $("#image" + j).attr("src", topTaco[j].Photo);
       $("#address" + j).html(topTaco[j].Address);
       $("#rating" + j).html(topTaco[j].AvgRating);
@@ -309,4 +318,26 @@ function addTacosToMap(topTaco) {
             draggable: true
         });
     }
+}
+
+function getUserRatings(topTaco) {
+    console.log('getting user ratings!');
+
+    var ratings = [];
+
+    for (var l = 0; l < 10; l++) {
+        var tacoID = topTaco[l].ID;
+        var reference = tacoID + "/";
+        var userRatings = firebase.database().ref(reference);
+        console.log(userRatings);
+        ratings.push(userRatings);
+        // if (userRatings !== null) {
+        //     for (var m = 0; m < userRatings.length; m++) {
+        //         var userRating = userRatings[m];
+        //         console.log(userRating);
+        //     }
+        // }
+    }
+    console.log(ratings);
+    return topTaco;
 }
