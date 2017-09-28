@@ -27,7 +27,7 @@ Tacos are serious business in Austin. Top Taco ATX hopes to solve the age old of
 * JavaScript
 * JQuery
 
-## Build With
+## Built With
 
 * Sublime Text - Text Editor
 * Wireframe.cc - Wireframing
@@ -38,7 +38,7 @@ Tacos are serious business in Austin. Top Taco ATX hopes to solve the age old of
 
 **[Nick Jacob](https://github.com/nick-jacob)** - *HTML, CSS, JavaScript, JQuery, Facebook API*
 
-**[William Chandler](https://github.com/wllm-chndlr)** - *HTLM, CSS, JavaScript, JQuery, Materialize*
+**[William Chandler](https://github.com/wllm-chndlr)** - *HTML, CSS, JavaScript, JQuery, Materialize, Firebase, API merging*
 
 **[Scott Shampine](https://github.com/sshampine)** - *HTML, CSS, JavaScript, JQuery, Google Places API*
 

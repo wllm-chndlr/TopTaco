@@ -21,9 +21,9 @@
   <body>
 
     <nav>
-      <div class="nav-wrapper">
-        <a href="#" class="brand-logo center">Top Taco ATX!</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <div class="nav-wrapper valign-wrapper">
+        <a href="#" class="brand-logo center">Top Taco ATX</a>
+        <ul id="nav-mobile" class="right right-align hide-on-med-and-down">
           <li><a href="#">More grub</a></li>
           <li><a href="#">Other cities</a></li>
         </ul>
@@ -34,13 +34,13 @@
     <!-- Modal Structure -->
     <div id="modal1" class="modal">
       <div class="modal-content">
-        <h4>Tabulating leader board with real-time data...</h4>
+        <h4>Tabulating leaderboard with real-time data...</h4>
         <p><em>This will close automatically</em></p>
       </div>
     </div>
 
        
-    <div class="row d-flex">
+    <div id="row1" class="row d-flex">
       <div class="col l1 d-flex">
       </div>
       <div class="col s10 l2 d-flex">
@@ -57,9 +57,9 @@
             <div class="card-reveal">
               <span class="card-title grey-text text-darken-4">#0<p id="name0"></p><i class="material-icons right">close</i></span>
               <p>Rate this place!</p>
-              <form>
+              <form class="rating-form">
                 <div class="input-field">
-                    <label for="rating-input">Rating</label>
+                    <label for="rating-input">1-5</label>
                     <input type="number" max="5" min="1" class="taco-rating" id="rating-input"></input>
                 </div>
                 <button type="submit" class="btn waves-effect pulse submit-taco-rating">Submit</button>
@@ -293,9 +293,9 @@
         </div>
     </div>
 
-    <div id="tacoRating"></div>
+    <!-- <div id="tacoRating"></div> -->
     
-    <div style="width:100%; height: 600px">
+    <div style="width:82.25%; margin: auto; height: 600px">
       <div id="map">            
       </div>
     </div>
@@ -306,14 +306,14 @@
           <div class="row">
             <div class="col l6 s12">
               <h5 class="white-text">Love tacos?</h5>
-              <p class="grey-text text-lighten-4">Contact us to learn how you can be a part of TopTaco!</p>
+              <p class="grey-text text-lighten-4"><a href="#" id="contact">Contact us</a> to learn how you can be a part of TopTaco!</p>
             </div>
           </div>
         </div>
         <div class="footer-copyright">
-          <div class="container">
-          © 2017 Nick Scott Will
-          <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+          <div class="container right-align">
+          © 2017 WCNJSS
+          <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
           </div>
         </div>
     </footer>
