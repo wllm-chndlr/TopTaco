@@ -1,3 +1,10 @@
+// ********************************** MODAL - LOADING RESULTS **********************************
+
+$(document).ready(function(){
+  $('#modal1').modal();
+  $('#modal1').modal('open'); 
+});
+
 // ********************************** FIREBASE/USER RATING **********************************
 
 // Initialize Firebase
@@ -11,6 +18,24 @@ var config = {
 };
 
 firebase.initializeApp(config);
+
+// $(document).ready(function(){
+//   // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+//   $('.modal').modal({
+//     dismissible: true, // Modal can be dismissed by clicking outside of the modal
+//     opacity: .5, // Opacity of modal background
+//     inDuration: 300, // Transition in duration
+//     outDuration: 200, // Transition out duration
+//     startingTop: '4%', // Starting top style attribute
+//     endingTop: '10%', // Ending top style attribute
+//     ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+//       alert("Ready");
+//       console.log(modal, trigger);
+//     },
+//     complete: function() { alert('Closed'); } // Callback for Modal close
+//   }
+//   );
+// });
 
 // Assign Firebase database to a variable
 var database = firebase.database();
@@ -159,7 +184,7 @@ function aggregateResults(resultsFb) {
 }
 
 function getFacebookResults() {
-  var fbSearches = ["Taco", "DosBatos", "Veracruz All Natural"];
+  var fbSearches = ["Taco", "Dos Batos", "Veracruz All Natural"];
 
   var fbAppID = "1293487770758016";
   var fbAppSecret = "e0911eecb55544d6de189dd6ad7d169b";
@@ -275,6 +300,7 @@ function findDuplicates() {
     topTaco = sortTacos(topTaco);
     displayResults(topTaco);
     addTacosToMap(topTaco);
+    $('#modal1').modal('close');
   }
 }
 
@@ -290,7 +316,8 @@ function sortTacos(topTaco) {
 function displayResults(topTaco) {
     for (var j = 0; j < 11; j++) {
       $("#name" + j).html(topTaco[j].Name);
-      $("#image" + j).attr("src", topTaco[j].Photo);
+      // $("#image" + j).attr("src", topTaco[j].Photo);
+      $("#image" + j).attr("src", "assets/images/" + topTaco[j].ID + ".jpg");
       $("#address" + j).html(topTaco[j].Address);
       $("#rating" + j).html(topTaco[j].AvgRating);
       $("#website" + j).attr("href", topTaco[j].Website);

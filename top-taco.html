@@ -21,22 +21,32 @@
   <body>
 
     <nav>
-      <div class="nav-wrapper">
-        <a href="#" class="brand-logo center">Top Taco ATX!</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <div class="nav-wrapper valign-wrapper">
+        <a href="#" class="brand-logo center">Top Taco ATX</a>
+        <ul id="nav-mobile" class="right right-align hide-on-med-and-down">
           <li><a href="#">More grub</a></li>
           <li><a href="#">Other cities</a></li>
         </ul>
       </div>  
     </nav>
 
-    <div class="row d-flex">
+ 
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal">
+      <div class="modal-content">
+        <h4>Tabulating leaderboard with real-time data...</h4>
+        <p><em>This will close automatically</em></p>
+      </div>
+    </div>
+
+       
+    <div id="row1" class="row d-flex">
       <div class="col l1 d-flex">
       </div>
-       <div class="col s10 l2 d-flex">
+      <div class="col s10 l2 d-flex">
         <div class="card hoverable">
             <div class="card-image waves-effect waves-block waves-light">
-              <img class="activator" src="assets/images/tacos.jpg" id="image0" class="responsive-img">
+              <img class="activator" src="assets/images/default-taco.jpg" id="image0" class="responsive-img">
             </div>
             
             <div class="card-content">
@@ -47,9 +57,9 @@
             <div class="card-reveal">
               <span class="card-title grey-text text-darken-4">#0<p id="name0"></p><i class="material-icons right">close</i></span>
               <p>Rate this place!</p>
-              <form>
+              <form class="rating-form">
                 <div class="input-field">
-                    <label for="rating-input">Rating</label>
+                    <label for="rating-input">1-5</label>
                     <input type="number" max="5" min="1" class="taco-rating" id="rating-input"></input>
                 </div>
                 <button type="submit" class="btn waves-effect pulse submit-taco-rating">Submit</button>
@@ -60,7 +70,7 @@
       <div class="col s10 l2 d-flex">
         <div class="card hoverable">
             <div class="card-image waves-effect waves-block waves-light">
-              <img class="activator" src="assets/images/tacos.jpg" id="image1">
+              <img class="activator" src="assets/images/default-taco.jpg" id="image1">
             </div>
             
             <div class="card-content">
@@ -84,7 +94,7 @@
       <div class="col s10 l2 d-flex">
           <div class="card hoverable">
               <div class="card-image waves-effect waves-block waves-light">
-                <img class="activator" src="assets/images/tacos.jpg" id="image2">
+                <img class="activator" src="assets/images/default-taco.jpg" id="image2">
               </div>
               <div class="card-content">
                   <span class="card-title activator grey-text text-darken-4">#2<p id ="name2"></p><p class="address" id="address2"></p><p id="rating2"></p><i class="material-icons right">more_vert</i></span>
@@ -106,7 +116,7 @@
       <div class="col s10 l2 d-flex">
           <div class="card hoverable">
               <div class="card-image waves-effect waves-block waves-light">
-                <img class="activator" src="assets/images/tacos.jpg" id="image3">
+                <img class="activator" src="assets/images/default-taco.jpg" id="image3">
               </div>
               <div class="card-content">
                   <span class="card-title activator grey-text text-darken-4">#3<p id ="name3"></p><p class="address" id="address3"></p><p id="rating3"></p><i class="material-icons right">more_vert</i></span>
@@ -128,7 +138,7 @@
       <div class="col s10 l2 d-flex">
           <div class="card hoverable">
               <div class="card-image waves-effect waves-block waves-light">
-                <img class="activator" src="assets/images/tacos.jpg" id="image4">
+                <img class="activator" src="assets/images/default-taco.jpg" id="image4">
               </div>
               <div class="card-content">
                   <span class="card-title activator grey-text text-darken-4">#4<p id ="name4"></p><p class="address" id="address4"></p><p id="rating4"></p><i class="material-icons right">more_vert</i></span>
@@ -147,31 +157,17 @@
                 </div>
           </div>
       </div>
-      <!--<div class="col s2">
-          <div class="card hoverable">
-              <div class="card-image waves-effect waves-block waves-light" id="image5">
-                <img class="activator" src="assets/images/tacos.jpg">
-              </div>
-              <div class="card-content">
-                  <span class="card-title activator grey-text text-darken-4">#5<p id ="name5"></p><p id="address5"></p><p id="rating5"></p><i class="material-icons right">more_vert</i></span>
-                  <p><a href="#">View details</a></p>
-                </div>
-                <div class="card-reveal">
-                  <span class="card-title grey-text text-darken-4">#5<i class="material-icons right">close</i></span>
-                  <p>Submit your own rating!</p>
-                </div>
-          </div>
-      </div>-->
       <div class="col l1 d-flex">
       </div>
     </div>
+
     <div class="row d-flex">
         <div class="col s1 d-flex">
         </div>
         <div class="col l2 d-flex">
           <div class="card hoverable">
               <div class="card-image waves-effect waves-block waves-light">
-                <img class="activator" src="assets/images/tacos.jpg" id="image5">
+                <img class="activator" src="assets/images/default-taco.jpg" id="image5">
               </div>
               <div class="card-content">
                   <span class="card-title activator grey-text text-darken-4">#5<p id ="name5"></p><p class="address" id="address5"></p><p id="rating5"></p><i class="material-icons right">more_vert</i></span>
@@ -193,7 +189,7 @@
       <div class="col l2 d-flex">
           <div class="card hoverable">
               <div class="card-image waves-effect waves-block waves-light">
-                <img class="activator" src="assets/images/tacos.jpg" id="image6">
+                <img class="activator" src="assets/images/default-taco.jpg" id="image6">
               </div>
               <div class="card-content">
                 <span class="card-title activator grey-text text-darken-4">#6<p id ="name6"></p><p class="address" id="address6"></p><p id="rating6"></p><i class="material-icons right">more_vert</i></span>
@@ -215,7 +211,7 @@
         <div class="col l2 d-flex">
             <div class="card hoverable">
                 <div class="card-image waves-effect waves-block waves-light">
-                  <img class="activator" src="assets/images/tacos.jpg" id="image7">
+                  <img class="activator" src="assets/images/default-taco.jpg" id="image7">
                 </div>
                 <div class="card-content">
                     <span class="card-title activator grey-text text-darken-4">#7<p id ="name7"></p><p class="address" id="address7"></p><p id="rating7"></p><i class="material-icons right">more_vert</i></span>
@@ -237,7 +233,7 @@
         <div class="col l2 d-flex">
             <div class="card hoverable">
                 <div class="card-image waves-effect waves-block waves-light">
-                  <img class="activator" src="assets/images/tacos.jpg" id="image8">
+                  <img class="activator" src="assets/images/default-taco.jpg" id="image8">
                 </div>
                 <div class="card-content">
                     <span class="card-title activator grey-text text-darken-4">#8<p id ="name8"></p><p class="address" id="address8"></p><p id="rating8"></p><i class="material-icons right">more_vert</i></span>
@@ -259,7 +255,7 @@
         <div class="col l2 d-flex">
             <div class="card hoverable">
                 <div class="card-image waves-effect waves-block waves-light">
-                  <img class="activator" src="assets/images/tacos.jpg" id="image9">
+                  <img class="activator" src="assets/images/default-taco.jpg" id="image9">
                 </div>
                 <div class="card-content">
                     <span class="card-title activator grey-text text-darken-4">#9<p id ="name9"></p><p class="address" id="address9"></p><p id="rating9"></p><i class="material-icons right">more_vert</i></span>
@@ -297,33 +293,27 @@
         </div>
     </div>
 
-    <div id="tacoRating"></div>
+    <!-- <div id="tacoRating"></div> -->
     
-    
-      
-        
-        <div style="width:100%; height: 600px">
-          <div id="map">            
-          </div>
-          </div>
+    <div style="width:82.25%; margin: auto; height: 600px">
+      <div id="map">            
+      </div>
+    </div>
     <!-- <img class="responsive-img" id="map" src="assets/images/map2.png">-->
       
-      
-    
-    
     <footer class="page-footer">
         <div class="container">
           <div class="row">
             <div class="col l6 s12">
               <h5 class="white-text">Love tacos?</h5>
-              <p class="grey-text text-lighten-4">Contact us to learn how you can be a part of TopTaco!</p>
+              <p class="grey-text text-lighten-4"><a href="#" id="contact">Contact us</a> to learn how you can be a part of TopTaco!</p>
             </div>
           </div>
         </div>
         <div class="footer-copyright">
-          <div class="container">
-          © 2017 Nick Scott Will
-          <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+          <div class="container right-align">
+          © 2017 WCNJSS
+          <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
           </div>
         </div>
     </footer>
