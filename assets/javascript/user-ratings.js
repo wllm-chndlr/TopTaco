@@ -327,13 +327,16 @@ function displayResults(topTaco) {
 function addTacosToMap(topTaco) {
     for (var k = 0; k < 10; k++) {
         var label = k.toString();
-        var myLatlng = new google.maps.LatLng(topTaco[k].Lat, topTaco[k].Lon);
-        var marker = new google.maps.Marker({
-            position: myLatlng,
+        var latLng = new google.maps.LatLng(topTaco[k].Lat, topTaco[k].Lon);
+        var icon = "./assets/icons/taco-medium.png";
+        var tacoMarker = new google.maps.Marker({
+            position: latLng,
             title: topTaco[k].Name,
-            label: label,
+            label: {fontWeight: "bold", text: label},
             map: map,
-            draggable: true
+            icon: icon,
+            draggable: true,
+            visible: true
         });
     }
 }
