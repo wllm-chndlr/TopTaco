@@ -325,7 +325,7 @@ function displayResults(topTaco) {
     for (var j = 0; j < 11; j++) {
       $("#name" + j).html(topTaco[j].Name);
       $("#button" + j).attr("data-id", topTaco[j].ID);
-      $("#image" + j).attr("src", topTaco[j].Photo);
+      $("#image" + j).attr("src", "assets/images/" + topTaco[j].ID + ".jpg");
       $("#address" + j).html(topTaco[j].Address);
       $("#rating" + j).html(topTaco[j].AvgRating);
       $("#website" + j).attr("href", topTaco[j].Website);
