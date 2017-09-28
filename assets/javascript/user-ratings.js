@@ -323,21 +323,34 @@ function addTacosToMap(topTaco) {
 function getUserRatings(topTaco) {
     console.log('getting user ratings!');
 
-    var ratings = [];
+    var userRatings = [];
 
     for (var l = 0; l < 10; l++) {
         var tacoID = topTaco[l].ID;
-        var reference = tacoID + "/";
-        var userRatings = firebase.database().ref(reference);
-        console.log(userRatings);
-        ratings.push(userRatings);
-        // if (userRatings !== null) {
-        //     for (var m = 0; m < userRatings.length; m++) {
-        //         var userRating = userRatings[m];
-        //         console.log(userRating);
-        //     }
-        // }
+        var tableThing = tacoID + "/";  // todo: what is this?
+        var ref = firebase.database().ref(tableThing);
+        ref.once("value", function (snapshot) {
+            snapshot.forEach(function (messageSnapshot) {
+                console.log(messageSnapshot.val());
+                var userEntry = messageSnapshot.val();
+                var userRating = messageSnapshot.val().userRating;
+                userRatings.push(parseFloat(userRating));
+            });
+        });
+
+        if (userRatings.length > 0) {
+            var sum;
+            var avg;
+            sum = userRatings.reduce(function(a, b) { return a + b; });
+            avg = sum / userRatings.length;
+        }
+        else {
+            avg = null;
+        }
+        
+        topTaco[l].URating = avg;
+
+        userRatings = [];
     }
-    console.log(ratings);
     return topTaco;
 }
