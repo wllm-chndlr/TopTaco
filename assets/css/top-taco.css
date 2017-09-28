@@ -12,7 +12,11 @@ body {
 }
 
 a.brand-logo {
-   font-size: 50px;
+   font-size: 60px;
+}
+
+#modal1 {
+  opacity: 0.5,
 }
 
 main {
@@ -21,6 +25,15 @@ main {
 
 .nav-wrapper, .page-footer {
    background-color: #474747;
+}
+
+div.nav-wrapper {
+  height: 100px;
+  margin-bottom: 20px;
+}
+
+#row1 {
+  margin-top: 60px;
 }
 
 #map {
@@ -32,12 +45,28 @@ main {
    margin-top: 20px;
 }
 
+/* .rating-form {
+  font-size: 16px;
+} */
+
 #tacoRating {
    text-align: center;
 }
 
 .address {
    font-size: 14px;
+}
+
+a, #contact {
+  color: #86B86B;
+}
+
+#map {
+  margin-bottom: 30px;
+}
+
+.page-footer {
+  margin-top: 40px;
 }
 
 .d-flex {

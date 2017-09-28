@@ -1,3 +1,10 @@
+// ********************************** MODAL - LOADING RESULTS **********************************
+
+$(document).ready(function(){
+  $('#modal1').modal();
+  $('#modal1').modal('open'); 
+});
+
 // ********************************** FIREBASE/USER RATING **********************************
 
 // Initialize Firebase
@@ -11,6 +18,24 @@ var config = {
 };
 
 firebase.initializeApp(config);
+
+// $(document).ready(function(){
+//   // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+//   $('.modal').modal({
+//     dismissible: true, // Modal can be dismissed by clicking outside of the modal
+//     opacity: .5, // Opacity of modal background
+//     inDuration: 300, // Transition in duration
+//     outDuration: 200, // Transition out duration
+//     startingTop: '4%', // Starting top style attribute
+//     endingTop: '10%', // Ending top style attribute
+//     ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+//       alert("Ready");
+//       console.log(modal, trigger);
+//     },
+//     complete: function() { alert('Closed'); } // Callback for Modal close
+//   }
+//   );
+// });
 
 // Assign Firebase database to a variable
 var database = firebase.database();
@@ -166,7 +191,7 @@ function aggregateResults(resultsFb) {
 }
 
 function getFacebookResults() {
-  var fbSearches = ["Taco", "DosBatos", "Veracruz All Natural"];
+  var fbSearches = ["Taco", "Dos Batos", "Veracruz All Natural"];
 
   var fbAppID = "1293487770758016";
   var fbAppSecret = "e0911eecb55544d6de189dd6ad7d169b";
@@ -283,6 +308,7 @@ function findDuplicates() {
     topTaco = getUserRatings(topTaco);
     displayResults(topTaco);
     addTacosToMap(topTaco);
+    $('#modal1').modal('close');
   }
 }
 
@@ -309,13 +335,16 @@ function displayResults(topTaco) {
 function addTacosToMap(topTaco) {
     for (var k = 0; k < 10; k++) {
         var label = k.toString();
-        var myLatlng = new google.maps.LatLng(topTaco[k].Lat, topTaco[k].Lon);
-        var marker = new google.maps.Marker({
-            position: myLatlng,
+        var latLng = new google.maps.LatLng(topTaco[k].Lat, topTaco[k].Lon);
+        var icon = "./assets/icons/taco-medium.png";
+        var tacoMarker = new google.maps.Marker({
+            position: latLng,
             title: topTaco[k].Name,
-            label: label,
+            label: {fontWeight: "bold", text: label},
             map: map,
-            draggable: true
+            icon: icon,
+            draggable: true,
+            visible: true
         });
     }
 }
