@@ -36,11 +36,11 @@ Tacos are serious business in Austin. Top Taco ATX hopes to solve the age old of
 
 ## Authors
 
-**Nick Jacob** - *HTML, CSS, JavaScript, JQuery, Facebook API*
+**[Nick Jacob](https://github.com/nick.jacob)** - *HTML, CSS, JavaScript, JQuery, Facebook API*
 
-**William Chandler** - *HTLM, CSS, JavaScript, JQuery, Materialize*
+**[William Chandler](https://github.com/wllm-chndlr)** - *HTLM, CSS, JavaScript, JQuery, Materialize*
 
-**Scott Shampine** - *HTML, CSS, JavaScript, JQuery, Google Places API*
+**[Scott Shampine](https://github.com/sshampine)** - *HTML, CSS, JavaScript, JQuery, Google Places API*
 
 ### Acknowledgements
 * Josh Madewell - Helping out with giving pointers on the Google API
