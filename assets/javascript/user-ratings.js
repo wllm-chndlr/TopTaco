@@ -63,6 +63,9 @@ $(".submit-taco-rating").on("click", function(event) {
   // Organize user ratings by unique taco id
   var reference = tacoID + "/";
 
+  console.log(reference);
+  console.log(userRating);
+
   // Uploads train data to the database
   database.ref(reference).push({
     userRating: userRating,
@@ -120,7 +123,7 @@ function initMap() {
     location: austin,
     radius: "100",
     query: "tacos in austin" //text search, can change the query string to anything e.g. shoe stores. 
-  }
+  };
 
   infowindow = new google.maps.InfoWindow();
         
@@ -177,21 +180,26 @@ google.maps.event.addListener(marker, 'click', function() {
 // ********************************** FACEBOOK API **********************************
 
 var facebookResults = [];
+var facebookIds = [];
 
 function aggregateResults(resultsFb) {
     for (var i = 0; i < resultsFb.length; i++) {
-        var inResults = jQuery.inArray(resultsFb[i], facebookResults);
+        var facebookId = resultsFb[i].id;
+        var inResults = jQuery.inArray(facebookId, facebookIds);
         if (inResults === -1) {
-          if ("street" in resultsFb[i].location) {
-              resultsFb[i].cleanAddressFb = resultsFb[i].location.street.replace(/\s|\./g, '').split(',')[0];
-              facebookResults.push(resultsFb[i]);
+          if ("street" in resultsFb[i].location && "overall_star_rating" in resultsFb[i]) {
+            resultsFb[i].cleanAddressFb = resultsFb[i].location.street.replace(/\s|\./g, '').split(',')[0];
+            facebookResults.push(resultsFb[i]);
+
           }
         }
+        facebookIds.push(facebookId);
     }
+    // console.log(facebookIds);
 }
 
 function getFacebookResults() {
-  var fbSearches = ["Taco", "Dos Batos", "Veracruz All Natural"];
+  var fbSearches = ["Taco", "Dos Batos", "Veracruz All Natural", "Tacos Guerrero"];
 
   var fbAppID = "1293487770758016";
   var fbAppSecret = "e0911eecb55544d6de189dd6ad7d169b";
@@ -200,7 +208,6 @@ function getFacebookResults() {
   var fbSearchPlaces = "type=place&center=30.2666,-97.7333&distance=15000&limit=100&q="; // meters
   var fbSearchFields = "&fields=name,rating_count,overall_star_rating,cover,location,website";
   var fbToken = "&access_token=" + fbAppID + "|" + fbAppSecret;
-  var queryURL = ""
 
   for (var i = 0; i < fbSearches.length; i++) {
 
@@ -350,8 +357,6 @@ function addTacosToMap(topTaco) {
 }
 
 function getUserRatings(topTaco) {
-    console.log('getting user ratings!');
-
     var userRatings = [];
 
     for (var l = 0; l < 10; l++) {
@@ -360,7 +365,6 @@ function getUserRatings(topTaco) {
         var ref = firebase.database().ref(tableThing);
         ref.once("value", function (snapshot) {
             snapshot.forEach(function (messageSnapshot) {
-                console.log(messageSnapshot.val());
                 var userEntry = messageSnapshot.val();
                 var userRating = messageSnapshot.val().userRating;
                 userRatings.push(parseFloat(userRating));
