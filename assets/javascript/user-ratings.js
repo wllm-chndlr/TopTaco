@@ -339,9 +339,16 @@ function displayResults(topTaco) {
       $("#button" + j).attr("data-id", topTaco[j].ID);
       $("#image" + j).attr("src", "assets/images/" + topTaco[j].ID + ".jpg");
       $("#address" + j).html(topTaco[j].Address);
-      $("#rating" + j).html(topTaco[j].AvgRating);
-      $("#urating" + j).html(" / " + topTaco[j].URating);      
+      // $("#rating" + j).html(topTaco[j].AvgRating + " / " + topTaco[j].URating.toFixed(2));
+      // $("#urating" + j).html(" / " + topTaco[j].URating);      
       $("#website" + j).attr("href", topTaco[j].Website);
+
+      if (!!topTaco[j].URating) {
+        $("#rating" + j).html(topTaco[j].AvgRating + " / " + topTaco[j].URating.toFixed(2));
+      }
+      else {
+        $("#urating" + j).html(" / " + topTaco[j].URating); 
+      }
     }
 }
 
@@ -356,7 +363,6 @@ function addTacosToMap(topTaco) {
             label: {fontWeight: "bold", text: label, fontfamily: "Homenaje"},
             map: map,
             icon: icon,
-            draggable: true,
             visible: true
         });
     }
