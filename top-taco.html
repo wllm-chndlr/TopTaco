@@ -5,7 +5,7 @@
 
     <!--Import Google Icons and Fonts-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Homenaje|Jockey+One|Sarpanch" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Homenaje|Jockey+One|Oswald|Racing+Sans+One|Sarpanch" rel="stylesheet">
 
     <!--Import materialize.css-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
@@ -23,19 +23,30 @@
     <nav>
       <div class="nav-wrapper valign-wrapper">
         <a href="#" class="brand-logo center">Top Taco ATX</a>
-        <ul id="nav-mobile" class="right right-align hide-on-med-and-down">
+        <!-- <ul id="nav-mobile" class="right right-align hide-on-med-and-down">
           <li><a href="#">More grub</a></li>
           <li><a href="#">Other cities</a></li>
-        </ul>
+        </ul> -->
       </div>  
     </nav>
 
+    <a id="menu" class="waves-effect waves-light btn btn-floating right-align" ><i class="material-icons">menu</i></a>
  
     <!-- Modal Structure -->
     <div id="modal1" class="modal">
       <div class="modal-content">
-        <h4>Tabulating leaderboard with real-time data...</h4>
+        <h4>Tabulating real-time data...</h4>
         <p><em>This will close automatically</em></p>
+      </div>
+    </div>
+
+
+  
+    <!-- Tap Target Structure -->
+    <div class="tap-target" data-activates="menu">
+      <div class="tap-target-content">
+        <h5>What is this?!</h5>
+        <p id="what">Tacos are serious business in Austin. Top Taco ATX hopes to solve the age-old issue of where to go for the best tacos in town. Top Taco aggregates taco ratings from Google and Facebook to produce one combined rating for quick reference. We do the work so you don't have to. You can also add your own Top Taco rating. Whose taco will reign supreme?</p>
       </div>
     </div>
 
@@ -83,7 +94,7 @@
               <p>Rate this place!</p>
               <form>
                 <div class="input-field">
-                    <label for="rating-input">Rating</label>
+                    <label for="rating-input">1-5</label>
                     <input type="number" max="5" min="1" class="taco-rating" id="input1"></input>
                 </div>
                 <button type="submit" class="btn waves-effect pulse submit-taco-rating" id="button1" value="input1">Submit</button>
@@ -105,7 +116,7 @@
                   <p>Rate this place!</p>
                   <form>
                     <div class="input-field">
-                        <label for="rating-input">Rating</label>
+                        <label for="rating-input">1-5</label>
                         <input type="number" max="5" min="1" class="taco-rating" id="input2"></input>
                     </div>
                     <button type="submit" class="btn waves-effect pulse submit-taco-rating" id="button2" value="input2">Submit</button>
@@ -127,7 +138,7 @@
                   <p>Rate this place!</p>
                   <form>
                     <div class="input-field">
-                        <label for="rating-input">Rating</label>
+                        <label for="rating-input">1-5</label>
                         <input type="number" max="5" min="1" class="taco-rating" id="input3"></input>
                     </div>
                     <button type="submit" class="btn waves-effect pulse submit-taco-rating" id="button3" value="input3">Submit</button>
@@ -149,7 +160,7 @@
                   <p>Rate this place!</p>
                   <form>
                     <div class="input-field">
-                        <label for="rating-input">Rating</label>
+                        <label for="rating-input">1-5</label>
                         <input type="number" max="5" min="1" class="taco-rating" id="input4"></input>
                     </div>
                     <button type="submit" class="btn waves-effect pulse submit-taco-rating" id="button4" value="input4">Submit</button>
@@ -178,7 +189,7 @@
                   <p>Rate this place!</p>
                   <form>
                     <div class="input-field">
-                        <label for="rating-input">Rating</label>
+                        <label for="rating-input">1-5</label>
                         <input type="number" max="5" min="1" class="taco-rating" id="input5"></input>
                     </div>
                     <button type="submit" class="btn waves-effect pulse submit-taco-rating" id="button5" value="input5">Submit</button>
@@ -200,7 +211,7 @@
                 <p>Rate this place!</p>
                 <form>
                   <div class="input-field">
-                      <label for="rating-input">Rating</label>
+                      <label for="rating-input">1-5</label>
                       <input type="number" max="5" min="1" class="taco-rating" id="input6"></input>
                   </div>
                   <button type="submit" class="btn waves-effect pulse submit-taco-rating" id="button6" value="input6">Submit</button>
@@ -222,7 +233,7 @@
                     <p>Rate this place!</p>
                     <form>
                       <div class="input-field">
-                          <label for="rating-input">Rating</label>
+                          <label for="rating-input">1-5</label>
                           <input type="number" max="5" min="1" class="taco-rating" id="input7"></input>
                       </div>
                       <button type="submit" class="btn waves-effect pulse submit-taco-rating" id="button7" value="input7">Submit</button>
@@ -244,7 +255,7 @@
                     <p>Rate this place!</p>
                     <form>
                     <div class="input-field">
-                        <label for="rating-input">Rating</label>
+                        <label for="rating-input">1-5</label>
                         <input type="number" max="5" min="1" class="taco-rating" id="input8"></input>
                     </div>
                     <button type="submit" class="btn waves-effect pulse submit-taco-rating" id="button8" value="input8">Submit</button>
@@ -266,7 +277,7 @@
                     <p>Rate this place!</p>
                     <form>
                       <div class="input-field">
-                          <label for="rating-input">Rating</label>
+                          <label for="rating-input">1-5</label>
                           <input type="number" max="5" min="1" class="taco-rating" id="input9"></input>
                       </div>
                       <button type="submit" class="btn waves-effect pulse submit-taco-rating" id="button9" value="input9">Submit</button>

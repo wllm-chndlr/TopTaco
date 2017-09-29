@@ -5,6 +5,10 @@ $(document).ready(function(){
   $('#modal1').modal('open'); 
 });
 
+$("#menu").on("click", function(event) {
+  $('.tap-target').tapTarget('open');
+});
+
 // ********************************** FIREBASE/USER RATING **********************************
 
 // Initialize Firebase
