@@ -8,15 +8,33 @@ body {
    display: flex;
    min-height: 100vh;
    flex-direction: column;
-   font-family: 'Jockey One', sans-serif;
+   font-family: 'Homenaje', sans-serif;
 }
 
 a.brand-logo {
    font-size: 60px;
+   font-family: 'Jockey One';
 }
 
 #modal1 {
   opacity: 0.5,
+}
+
+.tap-target {
+  background-color: #26a69a;
+}
+
+.tap-target-content {
+  color: #474747;
+  font-size: 16px;
+}
+
+h5 {
+  color: #fff;
+}
+
+#what {
+  width: 300px;
 }
 
 main {
@@ -58,7 +76,7 @@ div.nav-wrapper {
 }
 
 a, #contact {
-  color: #86B86B;
+  color: #26a69a;
 }
 
 #map {
@@ -67,6 +85,7 @@ a, #contact {
 
 .page-footer {
   margin-top: 40px;
+  font-family: 'Oswald', sans-serif;
 }
 
 .d-flex {
