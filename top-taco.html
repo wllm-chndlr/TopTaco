@@ -30,8 +30,6 @@
       </div>  
     </nav>
 
-    <a id="menu" class="waves-effect waves-light btn btn-floating right-align" ><i class="material-icons">menu</i></a>
- 
     <!-- Modal Structure -->
     <div id="modal1" class="modal">
       <div class="modal-content">
@@ -40,17 +38,24 @@
       </div>
     </div>
 
-
+    <a id="menu" class="waves-effect waves-light btn btn-floating right-align" ><i class="material-icons">menu</i></a>
   
     <!-- Tap Target Structure -->
     <div class="tap-target" data-activates="menu">
       <div class="tap-target-content">
         <h5>What is this?!</h5>
-        <p id="what">Tacos are serious business in Austin. Top Taco ATX hopes to solve the age-old issue of where to go for the best tacos in town. Top Taco aggregates taco ratings from Google and Facebook to produce one combined rating for quick reference. We do the work so you don't have to. You can also add your own Top Taco rating. Whose taco will reign supreme?</p>
+        <div id="what">
+        <p>Tacos are serious business in Austin. <em>Top Taco ATX</em> aggregates real-time ratings from Google and Facebook to produce one master rating and answer the age-old question: <strong>Who makes the best tacos in Austin?</strong></p>
+        <p>We also invite <em>Top Taco ATX</em> users to submit their own ratings. Just flip the card over to vote.</p> 
+        <p>Happy munching!</p>
+        </div>
       </div>
+    </div>   
+
+    <div class="parallax-container">
+      <div class="parallax"><img src="assets/images/torchys3.jpg" class="parallax-image"></div>
     </div>
 
-       
     <div id="row1" class="row d-flex">
       <div class="col l1 d-flex">
       </div>
@@ -61,7 +66,9 @@
             </div>
             
             <div class="card-content">
-              <span class="card-title activator grey-text text-darken-4">#0<p id="name0"></p><p class="address" id="address0"></p><p id="rating0"></p><i class="material-icons right">more_vert</i></span>
+              <span class="card-title activator grey-text text-darken-4">
+                #0<p id="name0"></p><p class="address" id="address0"></p><p id="rating0"></p><span id="urating0"></span><i class="material-icons right">swap_vert</i>
+              </span>
               <p><a href="#" id="website0">website</a></p>
             </div>
             
@@ -85,7 +92,7 @@
             </div>
             
             <div class="card-content">
-              <span class="card-title activator grey-text text-darken-4">#1<p id ="name1"></p><p class="address" id="address1"></p><p id="rating1"></p><i class="material-icons right">more_vert</i></span>
+              <span class="card-title activator grey-text text-darken-4">#1<p id ="name1"></p><p class="address" id="address1"></p><p id="rating1"></p><i class="material-icons right">swap_vert</i></span>
               <p><a href="#" id="website1">website</a></p>
             </div>
             
@@ -108,7 +115,7 @@
                 <img class="activator" src="assets/images/default-taco.jpg" id="image2">
               </div>
               <div class="card-content">
-                  <span class="card-title activator grey-text text-darken-4">#2<p id ="name2"></p><p class="address" id="address2"></p><p id="rating2"></p><i class="material-icons right">more_vert</i></span>
+                  <span class="card-title activator grey-text text-darken-4">#2<p id ="name2"></p><p class="address" id="address2"></p><p id="rating2"></p><i class="material-icons right">swap_vert</i></span>
                   <p><a href="#" id="website2">website</a></p>
                 </div>
                 <div class="card-reveal">
@@ -130,7 +137,7 @@
                 <img class="activator" src="assets/images/default-taco.jpg" id="image3">
               </div>
               <div class="card-content">
-                  <span class="card-title activator grey-text text-darken-4">#3<p id ="name3"></p><p class="address" id="address3"></p><p id="rating3"></p><i class="material-icons right">more_vert</i></span>
+                  <span class="card-title activator grey-text text-darken-4">#3<p id ="name3"></p><p class="address" id="address3"></p><p id="rating3"></p><i class="material-icons right">swap_vert</i></span>
                   <p><a href="#" id="website3">website</a></p>
                 </div>
                 <div class="card-reveal">
@@ -152,7 +159,7 @@
                 <img class="activator" src="assets/images/default-taco.jpg" id="image4">
               </div>
               <div class="card-content">
-                  <span class="card-title activator grey-text text-darken-4">#4<p id ="name4"></p><p class="address" id="address4"></p><p id="rating4"></p><i class="material-icons right">more_vert</i></span>
+                  <span class="card-title activator grey-text text-darken-4">#4<p id ="name4"></p><p class="address" id="address4"></p><p id="rating4"></p><i class="material-icons right">swap_vert</i></span>
                   <p><a href="#" id="website4">website</a></p>
                 </div>
                 <div class="card-reveal">
@@ -172,6 +179,10 @@
       </div>
     </div>
 
+    <div class="parallax-container">
+        <div class="parallax"><img src="assets/images/valentinas1.jpg" class="parallax-image"></div>
+    </div>
+
     <div class="row d-flex">
         <div class="col s1 d-flex">
         </div>
@@ -181,7 +192,7 @@
                 <img class="activator" src="assets/images/default-taco.jpg" id="image5">
               </div>
               <div class="card-content">
-                  <span class="card-title activator grey-text text-darken-4">#5<p id ="name5"></p><p class="address" id="address5"></p><p id="rating5"></p><i class="material-icons right">more_vert</i></span>
+                  <span class="card-title activator grey-text text-darken-4">#5<p id ="name5"></p><p class="address" id="address5"></p><p id="rating5"></p><i class="material-icons right">swap_vert</i></span>
                   <p><a href="#" id="website5">website</a></p>
                 </div>
                 <div class="card-reveal">
@@ -203,7 +214,7 @@
                 <img class="activator" src="assets/images/default-taco.jpg" id="image6">
               </div>
               <div class="card-content">
-                <span class="card-title activator grey-text text-darken-4">#6<p id ="name6"></p><p class="address" id="address6"></p><p id="rating6"></p><i class="material-icons right">more_vert</i></span>
+                <span class="card-title activator grey-text text-darken-4">#6<p id ="name6"></p><p class="address" id="address6"></p><p id="rating6"></p><i class="material-icons right">swap_vert</i></span>
                 <p><a href="#" id="website6">website</a></p>
               </div>
               <div class="card-reveal">
@@ -225,7 +236,7 @@
                   <img class="activator" src="assets/images/default-taco.jpg" id="image7">
                 </div>
                 <div class="card-content">
-                    <span class="card-title activator grey-text text-darken-4">#7<p id ="name7"></p><p class="address" id="address7"></p><p id="rating7"></p><i class="material-icons right">more_vert</i></span>
+                    <span class="card-title activator grey-text text-darken-4">#7<p id ="name7"></p><p class="address" id="address7"></p><p id="rating7"></p><i class="material-icons right">swap_vert</i></span>
                     <p><a href="#" id="website7">website</a></p>
                   </div>
                   <div class="card-reveal">
@@ -247,7 +258,7 @@
                   <img class="activator" src="assets/images/default-taco.jpg" id="image8">
                 </div>
                 <div class="card-content">
-                    <span class="card-title activator grey-text text-darken-4">#8<p id ="name8"></p><p class="address" id="address8"></p><p id="rating8"></p><i class="material-icons right">more_vert</i></span>
+                    <span class="card-title activator grey-text text-darken-4">#8<p id ="name8"></p><p class="address" id="address8"></p><p id="rating8"></p><i class="material-icons right">swap_vert</i></span>
                     <p><a href="#" id="website8">website</a></p>
                   </div>
                   <div class="card-reveal">
@@ -269,7 +280,7 @@
                   <img class="activator" src="assets/images/default-taco.jpg" id="image9">
                 </div>
                 <div class="card-content">
-                    <span class="card-title activator grey-text text-darken-4">#9<p id ="name9"></p><p class="address" id="address9"></p><p id="rating9"></p><i class="material-icons right">more_vert</i></span>
+                    <span class="card-title activator grey-text text-darken-4">#9<p id ="name9"></p><p class="address" id="address9"></p><p id="rating9"></p><i class="material-icons right">swap_vert</i></span>
                     <p><a href="#" id="website9">website</a></p>
                   </div>
                   <div class="card-reveal">
@@ -291,7 +302,7 @@
                   <img class="activator" src="assets/images/tacos.jpg">
                 </div>
                 <div class="card-content">
-                    <span class="card-title activator grey-text text-darken-4">#10<p id ="name10"></p><p id="address10"></p><p id="rating10"></p><i class="material-icons right">more_vert</i></span>
+                    <span class="card-title activator grey-text text-darken-4">#10<p id ="name10"></p><p id="address10"></p><p id="rating10"></p><i class="material-icons right">swap_vert</i></span>
                     <p><a href="#">View details</a></p>
                   </div>
                   <div class="card-reveal">
@@ -304,14 +315,21 @@
         </div>
     </div>
 
+    <div class="parallax-container">
+      <div class="parallax"><img src="assets/images/tacodeli2.jpg" class="parallax-image"></div>
+    </div>
+
     <!-- <div id="tacoRating"></div> -->
     
-    <div style="width:82.25%; margin: auto; height: 600px">
+    <div id="map-div" style="width:82.25%; margin: auto; height: 600px">
       <div id="map">            
       </div>
     </div>
-    <!-- <img class="responsive-img" id="map" src="assets/images/map2.png">-->
       
+    <div class="parallax-container">
+      <div class="parallax"><img src="assets/images/veracruz1.jpg" class="parallax-image"></div>
+    </div>
+
     <footer class="page-footer">
         <div class="container">
           <div class="row">

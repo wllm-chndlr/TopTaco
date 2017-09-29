@@ -3,6 +3,7 @@
 $(document).ready(function(){
   $('#modal1').modal();
   $('#modal1').modal('open'); 
+  $('.parallax').parallax();
 });
 
 $("#menu").on("click", function(event) {
@@ -339,6 +340,7 @@ function displayResults(topTaco) {
       $("#image" + j).attr("src", "assets/images/" + topTaco[j].ID + ".jpg");
       $("#address" + j).html(topTaco[j].Address);
       $("#rating" + j).html(topTaco[j].AvgRating);
+      $("#urating" + j).html(" / " + topTaco[j].URating);      
       $("#website" + j).attr("href", topTaco[j].Website);
     }
 }
@@ -351,7 +353,7 @@ function addTacosToMap(topTaco) {
         var tacoMarker = new google.maps.Marker({
             position: latLng,
             title: topTaco[k].Name,
-            label: {fontWeight: "bold", text: label},
+            label: {fontWeight: "bold", text: label, fontfamily: "Homenaje"},
             map: map,
             icon: icon,
             draggable: true,
