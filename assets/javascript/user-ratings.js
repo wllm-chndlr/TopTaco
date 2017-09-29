@@ -50,19 +50,29 @@ var userRating = 0;
 $(".submit-taco-rating").on("click", function(event) {
 
   event.preventDefault();
-  
+
+  // Grabs button value
+  var buttonValue = $(this).attr("value");
+  console.log(buttonValue);
+
   // Grabs user rating
-  userRating = $("#rating-input").val().trim();
+  var inputID = "#x".replace("x", buttonValue);
+  var userRating = $(inputID).val().trim();
   console.log(userRating);
 
-  // // Creates local temporary object for holding rating data
-  // var newRating = {
-  //   userRating: userRating
-  // };
+  // Grabs taco id
+  var tacoID = $(this).attr("data-id");
+  console.log(tacoID);
+
+  // Organize user ratings by unique taco id
+  var reference = tacoID + "/";
+
+  console.log(reference);
+  console.log(userRating);
 
   // Uploads train data to the database
-  database.ref().push({
-    newRating: userRating,
+  database.ref(reference).push({
+    userRating: userRating,
     dateAdded: firebase.database.ServerValue.TIMESTAMP
   });
 
@@ -117,7 +127,7 @@ function initMap() {
     location: austin,
     radius: "100",
     query: "tacos in austin" //text search, can change the query string to anything e.g. shoe stores. 
-  }
+  };
 
   infowindow = new google.maps.InfoWindow();
         
@@ -174,21 +184,26 @@ google.maps.event.addListener(marker, 'click', function() {
 // ********************************** FACEBOOK API **********************************
 
 var facebookResults = [];
+var facebookIds = [];
 
 function aggregateResults(resultsFb) {
     for (var i = 0; i < resultsFb.length; i++) {
-        var inResults = jQuery.inArray(resultsFb[i], facebookResults);
+        var facebookId = resultsFb[i].id;
+        var inResults = jQuery.inArray(facebookId, facebookIds);
         if (inResults === -1) {
-          if ("street" in resultsFb[i].location) {
-              resultsFb[i].cleanAddressFb = resultsFb[i].location.street.replace(/\s|\./g, '').split(',')[0];
-              facebookResults.push(resultsFb[i]);
+          if ("street" in resultsFb[i].location && "overall_star_rating" in resultsFb[i]) {
+            resultsFb[i].cleanAddressFb = resultsFb[i].location.street.replace(/\s|\./g, '').split(',')[0];
+            facebookResults.push(resultsFb[i]);
+
           }
         }
+        facebookIds.push(facebookId);
     }
+    // console.log(facebookIds);
 }
 
 function getFacebookResults() {
-  var fbSearches = ["Taco", "Dos Batos", "Veracruz All Natural"];
+  var fbSearches = ["Taco", "Dos Batos", "Veracruz All Natural", "Tacos Guerrero"];
 
   var fbAppID = "1293487770758016";
   var fbAppSecret = "e0911eecb55544d6de189dd6ad7d169b";
@@ -197,7 +212,6 @@ function getFacebookResults() {
   var fbSearchPlaces = "type=place&center=30.2666,-97.7333&distance=15000&limit=100&q="; // meters
   var fbSearchFields = "&fields=name,rating_count,overall_star_rating,cover,location,website";
   var fbToken = "&access_token=" + fbAppID + "|" + fbAppSecret;
-  var queryURL = ""
 
   for (var i = 0; i < fbSearches.length; i++) {
 
@@ -302,6 +316,7 @@ function findDuplicates() {
   console.log(topTaco);
   if (topTaco != undefined && topTaco.length > 24) {
     topTaco = sortTacos(topTaco);
+    topTaco = getUserRatings(topTaco);
     displayResults(topTaco);
     addTacosToMap(topTaco);
     $('#modal1').modal('close');
@@ -320,7 +335,7 @@ function sortTacos(topTaco) {
 function displayResults(topTaco) {
     for (var j = 0; j < 11; j++) {
       $("#name" + j).html(topTaco[j].Name);
-      // $("#image" + j).attr("src", topTaco[j].Photo);
+      $("#button" + j).attr("data-id", topTaco[j].ID);
       $("#image" + j).attr("src", "assets/images/" + topTaco[j].ID + ".jpg");
       $("#address" + j).html(topTaco[j].Address);
       $("#rating" + j).html(topTaco[j].AvgRating);
@@ -331,13 +346,48 @@ function displayResults(topTaco) {
 function addTacosToMap(topTaco) {
     for (var k = 0; k < 10; k++) {
         var label = k.toString();
-        var myLatlng = new google.maps.LatLng(topTaco[k].Lat, topTaco[k].Lon);
-        var marker = new google.maps.Marker({
-            position: myLatlng,
+        var latLng = new google.maps.LatLng(topTaco[k].Lat, topTaco[k].Lon);
+        var icon = "./assets/icons/taco-medium.png";
+        var tacoMarker = new google.maps.Marker({
+            position: latLng,
             title: topTaco[k].Name,
-            label: label,
+            label: {fontWeight: "bold", text: label},
             map: map,
-            draggable: true
+            icon: icon,
+            draggable: true,
+            visible: true
         });
     }
+}
+
+function getUserRatings(topTaco) {
+    var userRatings = [];
+
+    for (var l = 0; l < 10; l++) {
+        var tacoID = topTaco[l].ID;
+        var tableThing = tacoID + "/";  // todo: what is this?
+        var ref = firebase.database().ref(tableThing);
+        ref.once("value", function (snapshot) {
+            snapshot.forEach(function (messageSnapshot) {
+                var userEntry = messageSnapshot.val();
+                var userRating = messageSnapshot.val().userRating;
+                userRatings.push(parseFloat(userRating));
+            });
+        });
+
+        if (userRatings.length > 0) {
+            var sum;
+            var avg;
+            sum = userRatings.reduce(function(a, b) { return a + b; });
+            avg = sum / userRatings.length;
+        }
+        else {
+            avg = null;
+        }
+        
+        topTaco[l].URating = avg;
+
+        userRatings = [];
+    }
+    return topTaco;
 }
