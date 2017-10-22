@@ -2,7 +2,11 @@
 
 ## Introduction
 
-Tacos are serious business in Austin. Top Taco ATX hopes to solve the age old office issue of where to go for the best tacos in town. Top Taco aggregates taco ratings from Google and Facebook to produce one combined rating for quick reference. We do the work so you don't have to. You can also add your own Top Taco rating. Whose taco will reign supreme?
+Tacos are serious business in Austin. Top Taco ATX aggregates real-time ratings from Google and Facebook to produce one master rating and answer the age-old question: Who makes the best tacos in Austin?
+
+We also invite Top Taco ATX users to submit their own ratings. Just flip the card over to vote.
+
+Happy munching!
 
 **[Top Taco ATX](https://wllm-chndlr.github.io/TopTaco/)**
 
@@ -40,7 +44,7 @@ Tacos are serious business in Austin. Top Taco ATX hopes to solve the age old of
 
 **[Nick Jacob](https://github.com/nick-jacob)** - *HTML, CSS, JavaScript, JQuery, Facebook API*
 
-**[William Chandler](https://github.com/wllm-chndlr)** - *HTML, CSS, JavaScript, JQuery, Materialize, Firebase, API merging*
+**[William Chandler](https://github.com/wllm-chndlr)** - *HTML, CSS, JavaScript, JQuery, Firebase, API merging*
 
 **[Scott Shampine](https://github.com/sshampine)** - *HTML, CSS, JavaScript, JQuery, Google Places API*
 
