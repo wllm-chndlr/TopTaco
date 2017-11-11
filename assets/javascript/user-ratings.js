@@ -108,7 +108,7 @@ function initMap() {
     zoom: 12
   });
 
-  var reqeust = {
+  var request = {
     location: austin,
     radius: "100",
     query: "tacos in austin" //text search, can change the query string to anything e.g. shoe stores. 
@@ -117,7 +117,7 @@ function initMap() {
   infowindow = new google.maps.InfoWindow();
         
   var service = new google.maps.places.PlacesService(map);
-  service.textSearch(reqeust, callback);
+  service.textSearch(request, callback);
 }
 
 function callback(results, status, pagination) {
@@ -309,6 +309,8 @@ function displayResults(topTaco) {
 }
 
 function addTacosToMap(topTaco) {
+  var bounds = new google.maps.LatLngBounds();
+
   for (var k = 0; k < 10; k++) {
     var label = k.toString();
     var latLng = new google.maps.LatLng(topTaco[k].Lat, topTaco[k].Lon);
@@ -321,7 +323,10 @@ function addTacosToMap(topTaco) {
         icon: icon,
         visible: true
     });
+    bounds.extend(tacoMarker.getPosition());
   }
+  map.setCenter(bounds.getCenter());
+  map.fitBounds(bounds);
 }
 
 function getUserRatings(topTaco) {
