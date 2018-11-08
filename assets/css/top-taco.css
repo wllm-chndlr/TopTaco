@@ -24,12 +24,17 @@ a.brand-logo {
   font-size: 16px;
 }
 
+#menu {
+    margin-left: 15px;
+}
+
 h5 {
   color: #fff;
 }
 
 #what {
   width: 300px;
+  color: #fff;
 }
 
 main {
