@@ -299,11 +299,11 @@ function displayResults(topTaco) {
     $("#address" + j).html(topTaco[j].Address);     
     $("#website" + j).attr("href", topTaco[j].Website);
 
-    if (!!topTaco[j].URating) {
-      $("#rating" + j).html(topTaco[j].AvgRating + " / " + topTaco[j].URating.toFixed(2));
+    if (topTaco[j].URating !== null) {
+        $("#rating" + j).html(topTaco[j].AvgRating.toFixed(2) + " / " + topTaco[j].URating.toFixed(2));
     }
     else {
-      $("#urating" + j).html(" / " + topTaco[j].URating); 
+        $("#rating" + j).html(topTaco[j].AvgRating.toFixed(2));
     }
   }
 }
