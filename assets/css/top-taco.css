@@ -11,6 +11,10 @@ a.brand-logo {
    font-family: 'Racing Sans One';
 }
 
+.modal {
+    width: 25%;
+}
+
 #modal1 {
   opacity: 0.5,
 }
