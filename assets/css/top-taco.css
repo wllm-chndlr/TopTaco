@@ -2,7 +2,7 @@ body {
    display: flex;
    min-height: 100vh;
    flex-direction: column;
-   font-family: 'Homenaje', sans-serif;
+   font-family: 'Oswald', sans-serif;
    color: #474747;
 }
 
@@ -77,6 +77,9 @@ a, #contact {
 
 #map-div {
   margin-bottom: 60px;
+  width:82.25%; 
+  margin: auto; 
+  height: 600px;
 }
 
 .parallax-image {
