@@ -8,14 +8,14 @@ $(document).ready(function(){
 
 // ********************************** TAP TARGET **********************************
 
-$("#menu").on("click", function(event) {
+$("#menu").on("click", (event) => {
   $('.tap-target').tapTarget('open');
 });
 
 // ********************************** FIREBASE/USER RATING **********************************
 
 // Initialize Firebase
-var config = {
+const config = {
   apiKey: "AIzaSyDYHtujNwrjbWo4W27RWfhsdRW0isii6j0",
   authDomain: "top-taco-fa533.firebaseapp.com",
   databaseURL: "https://top-taco-fa533.firebaseio.com",
@@ -27,30 +27,30 @@ var config = {
 firebase.initializeApp(config);
 
 // Assign Firebase database to a variable
-var database = firebase.database();
+const database = firebase.database();
 
-var userRating = 0;
+let userRating = 0;
 
 // Button to submit taco rating
-$(".submit-taco-rating").on("click", function(event) {
+$(".submit-taco-rating").on("click", (event) => {
 
   event.preventDefault();
 
   // Grabs button value
-  var buttonValue = $(this).attr("value");
+  const buttonValue = $(this).attr("value");
   console.log(buttonValue);
 
   // Grabs user rating
-  var inputID = "#x".replace("x", buttonValue);
-  var userRating = $(inputID).val().trim();
+  const inputID = "#x".replace("x", buttonValue);
+  const userRating = $(inputID).val().trim();
   console.log(userRating);
 
   // Grabs taco id
-  var tacoID = $(this).attr("data-id");
+  const tacoID = $(this).attr("data-id");
   console.log(tacoID);
 
   // Organize user ratings by unique taco id
-  var reference = tacoID + "/";
+  const reference = tacoID + "/";
 
   console.log(reference);
   console.log(userRating);
@@ -81,34 +81,34 @@ database.ref().orderByChild("dateAdded").on("child_added", function(childSnapsho
   $("#tacoRating").append(tacoz);
   
 // Handle the errors
-}, function(errorObject) {
+}, (errorObject) => {
   console.log("Errors handled: " + errorObject.code);
 });
 
 // ********************************** GOOGLE API **********************************
 
 // Define map
-var map;
+let map;
 // Define infowindow
-var infowindow;
+let infowindow;
 //Define results array
-var googleResults = [];
-var cleanAddressGoogle = "";
-var name = "";
-var rating = "";
-var address = "";
-var splitAddress = "";
+let googleResults = [];
+let cleanAddressGoogle = "";
+let name = "";
+let rating = "";
+let address = "";
+let splitAddress = "";
 
 //initMap function, places map with location centered
 function initMap() {
-  var austin = {lat: 30.2672, lng: -97.7431};
+  const austin = {lat: 30.2672, lng: -97.7431};
 
   map = new google.maps.Map(document.getElementById('map'), {
     center: austin,
     zoom: 12
   });
 
-  var request = {
+  const request = {
     location: austin,
     radius: "100",
     query: "tacos in austin" //text search, can change the query string to anything e.g. shoe stores. 
@@ -116,14 +116,14 @@ function initMap() {
 
   infowindow = new google.maps.InfoWindow();
         
-  var service = new google.maps.places.PlacesService(map);
+  const service = new google.maps.places.PlacesService(map);
   service.textSearch(request, callback);
 }
 
 function callback(results, status, pagination) {
   // console.log('running callback provided to google')
   if (status === google.maps.places.PlacesServiceStatus.OK) {
-    for (var i = 0; i < results.length; i++) {
+    for (let i = 0; i < results.length; i++) {
       // createMarker(results[i]);
 
       if ("formatted_address" in results[i]) {
@@ -131,7 +131,7 @@ function callback(results, status, pagination) {
       results[i].cleanAddressGoogle = results[i].formatted_address.replace(/\s|\./g, '').split(',')[0];
       googleResults.push(results[i])
       
-      var splitAddress = googleResults[i].formatted_address.replace(/\s|\./g, '').split(',')[0];
+      let splitAddress = googleResults[i].formatted_address.replace(/\s|\./g, '').split(',')[0];
      
       }
     }
@@ -149,8 +149,8 @@ function callback(results, status, pagination) {
 console.log(googleResults);
 
 function createMarker(place) {
-  var placeLoc = place.geometry.location;
-  var marker = new google.maps.Marker({
+  const placeLoc = place.geometry.location;
+  const marker = new google.maps.Marker({
   map: map,
   position: place.geometry.location
 });
