@@ -163,13 +163,13 @@ google.maps.event.addListener(marker, 'click', function() {
 
 // ********************************** FACEBOOK API **********************************
 
-var facebookResults = [];
-var facebookIds = [];
+const facebookResults = [];
+const facebookIds = [];
 
 function aggregateResults(resultsFb) {
-    for (var i = 0; i < resultsFb.length; i++) {
-        var facebookId = resultsFb[i].id;
-        var inResults = jQuery.inArray(facebookId, facebookIds);
+    for (let i = 0; i < resultsFb.length; i++) {
+        let facebookId = resultsFb[i].id;
+        let inResults = jQuery.inArray(facebookId, facebookIds);
         if (inResults === -1) {
           if ("street" in resultsFb[i].location && "overall_star_rating" in resultsFb[i]) {
             resultsFb[i].cleanAddressFb = resultsFb[i].location.street.replace(/\s|\./g, '').split(',')[0];
@@ -182,17 +182,17 @@ function aggregateResults(resultsFb) {
 }
 
 function getFacebookResults() {
-  var fbSearches = ["Taco", "Dos Batos", "Veracruz All Natural", "Tacos Guerrero"];
+  const fbSearches = ["Taco", "Dos Batos", "Veracruz All Natural", "Tacos Guerrero"];
 
-  var fbAppID = "1293487770758016";
-  var fbAppSecret = "e0911eecb55544d6de189dd6ad7d169b";
+  const fbAppID = "1293487770758016";
+  const fbAppSecret = "e0911eecb55544d6de189dd6ad7d169b";
 
-  var fbBaseURL = "https://graph.facebook.com/v2.10/search?";
-  var fbSearchPlaces = "type=place&center=30.2666,-97.7333&distance=15000&limit=100&q="; // meters
-  var fbSearchFields = "&fields=name,rating_count,overall_star_rating,cover,location,website";
-  var fbToken = "&access_token=" + fbAppID + "|" + fbAppSecret;
+  const fbBaseURL = "https://graph.facebook.com/v2.10/search?";
+  const fbSearchPlaces = "type=place&center=30.2666,-97.7333&distance=15000&limit=100&q="; // meters
+  const fbSearchFields = "&fields=name,rating_count,overall_star_rating,cover,location,website";
+  const fbToken = "&access_token=" + fbAppID + "|" + fbAppSecret;
 
-  for (var i = 0; i < fbSearches.length; i++) {
+  for (let i = 0; i < fbSearches.length; i++) {
 
     queryURL = fbBaseURL + fbSearchPlaces + fbSearches[i] + fbSearchFields + fbToken;
 
@@ -227,11 +227,11 @@ function facebookComplete() {
     findDuplicates();
   }
   else {
-    //
+    // TODO: update
   }
 }
 
-var topTaco = [];
+const topTaco = [];
 
 function findDuplicates() {
 
