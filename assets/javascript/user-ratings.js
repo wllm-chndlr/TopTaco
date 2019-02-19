@@ -38,22 +38,16 @@ $(document).ready(function(){
   
     // Grabs button value
     const buttonValue = $(this).attr("value");
-    console.log(buttonValue);
   
     // Grabs user rating
     const inputID = "#x".replace("x", buttonValue);
     const userRating = $(inputID).val().trim();
-    console.log(userRating);
   
     // Grabs taco id
     const tacoID = $(this).attr("data-id");
-    console.log(tacoID);
   
     // Organize user ratings by unique taco id
     const reference = tacoID + "/";
-  
-    console.log(reference);
-    console.log(userRating);
   
     // Uploads rating data to the database
     database.ref(reference).push({
@@ -75,7 +69,7 @@ $(document).ready(function(){
   database.ref().orderByChild("dateAdded").on("child_added", function(childSnapshot) {
     
     // Store the snapshot.val() in a variable for convenience
-    var tacoz = childSnapshot.val().newRating;
+    const tacoz = childSnapshot.val().newRating;
   
     // Append rating details to the div
     $("#tacoRating").append(tacoz);
@@ -149,7 +143,7 @@ $(document).ready(function(){
   console.log(googleResults);
   
   function createMarker(place) {
-    const placeLoc = place.geometry.location;
+    // const placeLoc = place.geometry.location;
     const marker = new google.maps.Marker({
     map: map,
     position: place.geometry.location
@@ -182,7 +176,7 @@ $(document).ready(function(){
   }
   
   function getFacebookResults() {
-    const fbSearches = ["Taco", "Dos Batos", "Veracruz All Natural", "Tacos Guerrero"];
+    const fbSearches = ["Taco", "Dos Batos", "Valentinas", "Veracruz All Natural", "Tacos Guerrero"];
   
     const fbAppID = "1293487770758016";
     const fbAppSecret = "e0911eecb55544d6de189dd6ad7d169b";
@@ -200,7 +194,7 @@ $(document).ready(function(){
             url: queryURL,
             method: "GET"
         }).done(function(response) {
-            var resultsFb = response.data;
+            const resultsFb = response.data;
             aggregateResults(resultsFb);
         });
     }
@@ -218,7 +212,7 @@ $(document).ready(function(){
     if (facebookComplete) {
       findDuplicates();
     }
-  }
+  };
   
   function facebookComplete() {
     facebookComplete = true;
@@ -226,12 +220,9 @@ $(document).ready(function(){
     if (googleComplete) {
       findDuplicates();
     }
-    else {
-      // TODO: update
-    }
-  }
+  };
   
-  let topTaco = [];
+  var topTaco = [];
   
   function findDuplicates() {
   
@@ -252,8 +243,6 @@ $(document).ready(function(){
             tacoObject.Address = facebookResults[guac].location.street;
             tacoObject.Lon = facebookResults[guac].location.longitude;
             tacoObject.Lat = facebookResults[guac].location.latitude;
-
-            console.log(tacoObject);
   
             if ("cover" in facebookResults[guac]) {
                 tacoObject.Photo = facebookResults[guac].cover.source;
@@ -274,10 +263,10 @@ $(document).ready(function(){
         }
       }
     }
-  //   console.log(topTaco);
-    if (topTaco != undefined && topTaco.length > 24) {
-      topTaco = sortTacos(topTaco);
-      topTaco = getUserRatings(topTaco);
+    console.log(topTaco);
+    if (topTaco != undefined && topTaco.length >= 24) {
+      sortTacos(topTaco);
+      getUserRatings(topTaco);
       displayResults(topTaco);
       addTacosToMap(topTaco);
       $('#modal1').modal('close');
@@ -332,23 +321,23 @@ $(document).ready(function(){
   }
   
   function getUserRatings(topTaco) {
-      const userRatings = [];
+      var userRatings = [];
   
-      for (let l = 0; l < 10; l++) {
-          const tacoID = topTaco[l].ID;
-          const tableThing = tacoID + "/";  // todo: what is this?
-          const ref = firebase.database().ref(tableThing);
+      for (var l = 0; l < 10; l++) {
+          var tacoID = topTaco[l].ID;
+          var tableThing = tacoID + "/";  // todo: what is this?
+          var ref = firebase.database().ref(tableThing);
           ref.once("value", function (snapshot) {
               snapshot.forEach(function (messageSnapshot) {
-                  const userEntry = messageSnapshot.val();
-                  const userRating = messageSnapshot.val().userRating;
+                  var userEntry = messageSnapshot.val();
+                  var userRating = messageSnapshot.val().userRating;
                   userRatings.push(parseFloat(userRating));
               });
           });
   
           if (userRatings.length > 0) {
-              let sum;
-              let avg;
+              var sum;
+              var avg;
               sum = userRatings.reduce(function(a, b) { return a + b; });
               avg = sum / userRatings.length;
           }
