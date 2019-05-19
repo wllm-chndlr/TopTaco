@@ -302,7 +302,7 @@ $(document).ready(function(){
   function addTacosToMap(topTaco) {
     const bounds = new google.maps.LatLngBounds();
   
-    for (let k = 0; k < 10; k++) {
+    for (let k = 1; k < 11; k++) {
       const label = k.toString();
       const latLng = new google.maps.LatLng(topTaco[k].Lat, topTaco[k].Lon);
       const icon = "./assets/icons/taco-medium.png";
